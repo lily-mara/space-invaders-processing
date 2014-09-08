@@ -45,13 +45,19 @@ void setup() {
 	initializeInvaders();
 }
 
+void initializeInvaders() {
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 11; j++) {
+			invaders[i][j] = new Invader(i*50, sDeltaY * i);
+		}
+	}
+}
+
 void draw() {
 	background(0);
 	CreatePlayer(mouseX, height - 100);
 	ShotChecker();
 	RenderGUI();
-	makeSIArray();
-	DrawSIArray();
 	DrawRoofs();
 }
 
@@ -183,40 +189,6 @@ void RenderSI(int centerX, int centerY) {
 	rect(centerX + 16, centerY - 0, 4, 8);
 	rect(centerX - 20, centerY + 6, 4, 12);
 	rect(centerX + 20, centerY + 6, 4, 12);
-}
-
-void makeSIArray() {
-	/*
-	fills in the values of the x and y coordinates for all of the space
-	 invader sprites. This method is the main reason for the slowness
-	 at the beginning of this program's execution
-	 */
-	for (int i = 0; i<11; i++) {
-		row1X[i] = sStartX + (i * 50);
-		row2X[i] = sStartX + (i * 50);
-		row3X[i] = sStartX + (i * 50);
-		row4X[i] = sStartX + (i * 50);
-		row5X[i] = sStartX + (i * 50);
-
-		row1Y[i] = sStartY;
-		row2Y[i] = sStartY + sDeltaY * 1;
-		row3Y[i] = sStartY + sDeltaY * 2;
-		row4Y[i] = sStartY + sDeltaY * 3;
-		row5Y[i] = sStartY + sDeltaY * 4;
-	}
-}
-
-void DrawSIArray() {
-	/*
-	Draws all of the Space Invaders based on the "row" arrays
-	 */
-	for (int i = 0; i<11; i++) {
-		RenderSI(row1X[i], row1Y[i]);
-		RenderSI(row2X[i], row2Y[i]);
-		RenderSI(row3X[i], row3Y[i]);
-		RenderSI(row4X[i], row4Y[i]);
-		RenderSI(row5X[i], row5Y[i]);
-	}
 }
 
 void DrawRoof(int posX, int posY) {
