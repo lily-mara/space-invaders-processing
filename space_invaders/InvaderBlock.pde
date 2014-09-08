@@ -8,6 +8,8 @@ public class InvaderBlock {
 	private int blockHeight;
 	private int startX;
 	private int startY;
+	private int lastUpdate;
+	private int delay;
 
 	/**
 	   An instance of InvaderBlock class is a collection of Invader objects
@@ -22,6 +24,9 @@ public class InvaderBlock {
 		this.startY = startY;
 		this.blockWidth = blockWidth;
 		this.blockHeight = blockHeight;
+
+		this.lastUpdate = 0;
+		this.delay = 100;
 
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
