@@ -1,5 +1,5 @@
 public class Invader {
-	private final int MOVE_FACTOR = 2;
+	private final int MOVE_FACTOR = 1;
 
 	private int posX;
 	private int posY;
@@ -19,7 +19,7 @@ public class Invader {
 	/**
 	   Draw this space invader
 	 */
-	void render() {
+	public void render() {
 		rect(this.posX, this.posY + 5, 28, 8);
 		rect(this.posX, this.posY, 12, 16);
 		rect(this.posX - 12, this.posY + 10, 4, 4);
@@ -39,11 +39,18 @@ public class Invader {
 		rect(this.posX - 20, this.posY + 6, 4, 12);
 		rect(this.posX + 20, this.posY + 6, 4, 12);
 	}
+	
+	/**
+	   Reverse the direction of this space invader
+	 */
+	public void flip() {
+		this.moveRight = !this.moveRight;
+	}
 
 	/**
 	   Update the location of this space invader
 	 */
-	void update() {
+	public void update() {
 		if (this.moveRight) {
 			this.posX += MOVE_FACTOR;
 		} else {
