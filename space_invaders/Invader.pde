@@ -62,6 +62,10 @@ public class Invader {
 	public void downLevel() {
 		this.posY += LEVEL;
 	}
+	
+	public boolean isAlive() {
+		return this.isAlive;
+	}
 
 	public int getX() {
 		return this.posX;
