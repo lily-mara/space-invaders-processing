@@ -28,7 +28,7 @@ public class InvaderBlock {
 		this.blockHeight = blockHeight;
 
 		this.lastUpdate = 0;
-		this.delay = 100;
+		this.delay = 300;
 
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
