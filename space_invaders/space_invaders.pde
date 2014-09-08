@@ -53,10 +53,7 @@ void draw() {
 	RenderGUI();
 	DrawRoofs();
 	invaders.render();
-	if (millis() > lastUpdate + 100) {
-		invaders.update();
-		lastUpdate = millis();
-	}
+	invaders.update();
 }
 
 void TextLine(String inputText, int inputLine) {

@@ -50,13 +50,17 @@ public class InvaderBlock {
 	}
 
 	public void update() {
-		if (this.flipCheck()) {
-			this.flip();
-		}
+		if (millis() > this.lastUpdate + this.delay) {
+			this.lastUpdate = millis();
 
-		for (Invader[] i : this.block) {
-			for (Invader j : i) {
-				j.update();
+			if (this.flipCheck()) {
+				this.flip();
+			}
+
+			for (Invader[] i : this.block) {
+				for (Invader j : i) {
+					j.update();
+				}
 			}
 		}
 	}
