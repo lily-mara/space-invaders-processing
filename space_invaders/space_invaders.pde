@@ -168,29 +168,6 @@ void RenderGUI() {
 	text("SCORE: " + score, 50, 20);
 }
 
-void RenderSI(int centerX, int centerY) {
-	// this massive steaming pile of code creates one Space Invader.
-	// I will not be making the other 5 types...
-	rect(centerX, centerY + 5, 28, 8);
-	rect(centerX, centerY, 12, 16);
-	rect(centerX - 12, centerY + 10, 4, 4);
-	rect(centerX + 12, centerY + 10, 4, 4);
-	rect(centerX - 6, centerY + 14, 8, 4);
-	rect(centerX + 6, centerY + 14, 8, 4);
-	rect(centerX - 8, centerY - 10, 4, 4);
-	rect(centerX + 8, centerY - 10, 4, 4);
-	rect(centerX - 12, centerY - 14, 4, 4);
-	rect(centerX + 12, centerY - 14, 4, 4);
-	rect(centerX - 10, centerY - 6, 8, 4);
-	rect(centerX + 10, centerY - 6, 8, 4);
-	rect(centerX - 12, centerY - 1, 4, 6);
-	rect(centerX + 12, centerY - 1, 4, 6);
-	rect(centerX - 16, centerY - 0, 4, 8);
-	rect(centerX + 16, centerY - 0, 4, 8);
-	rect(centerX - 20, centerY + 6, 4, 12);
-	rect(centerX + 20, centerY + 6, 4, 12);
-}
-
 void DrawRoof(int posX, int posY) {
 	/*
 	Draws the "roofs" (not really sure what to call them) at the "posX"
