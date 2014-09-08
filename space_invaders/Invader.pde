@@ -39,7 +39,7 @@ public class Invader {
 		rect(this.posX - 20, this.posY + 6, 4, 12);
 		rect(this.posX + 20, this.posY + 6, 4, 12);
 	}
-	
+
 	/**
 	   Reverse the direction of this space invader
 	 */
@@ -56,6 +56,14 @@ public class Invader {
 		} else {
 			this.posX -= MOVE_FACTOR;
 		}
+	}
+
+	public int getX() {
+		return this.posX;
+	}
+
+	public int getY() {
+		return this.posY;
 	}
 
 }
