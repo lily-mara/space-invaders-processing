@@ -1,7 +1,7 @@
 public class InvaderBlock {
 	private final int BORDER = 40;
 	private final int DELTA_X = 50;
-	private final int DELTA_Y = 75;
+	private final int DELTA_Y = 60;
 
 	private Invader[][] block;
 	private int blockWidth;
