@@ -36,11 +36,7 @@ public class InvaderBlock {
 	   Draws every Invader object in this InvaderBlock
 	 */
 	public void render() {
-		if (this.block[0][this.blockWidth-1].getX() >= width-BORDER) {
-			this.flip();
-		}
-		
-		if (this.block[0][0].getX() <= BORDER) {
+		if (this.flipCheck()) {
 			this.flip();
 		}
 
@@ -50,6 +46,18 @@ public class InvaderBlock {
 				j.update();
 			}
 		}
+	}
+	
+	public boolean flipCheck() {
+		if (this.block[0][this.blockWidth-1].getX() >= width-BORDER) {
+			return true;
+		}
+		
+		if (this.block[0][0].getX() <= BORDER) {
+			return true;
+		}
+
+		return false;
 	}
 	
 	private void flip() {
