@@ -33,7 +33,7 @@ PImage roof;
 // Array that stores Invaders
 InvaderBlock invaders;
 
-int lastUpdate = 0;
+boolean gameOver = false;
 
 void setup() {
 	size(651, 744);
@@ -47,13 +47,21 @@ void setup() {
 }
 
 void draw() {
-	background(0);
-	CreatePlayer(mouseX, height - 100);
-	ShotChecker();
-	RenderGUI();
-	DrawRoofs();
-	invaders.render();
-	invaders.update();
+	if (!gameOver) {
+		background(0);
+		CreatePlayer(mouseX, height - 100);
+		ShotChecker();
+		RenderGUI();
+		DrawRoofs();
+		invaders.render();
+		invaders.update();
+
+		if (invaders.belowHeight(height)) {
+		  gameOver = true;
+		}
+	} else {
+		TextLine("GAME OVER", 5);
+	}
 }
 
 void TextLine(String inputText, int inputLine) {
