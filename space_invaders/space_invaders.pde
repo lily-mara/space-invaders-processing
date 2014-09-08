@@ -48,7 +48,9 @@ void setup() {
 void initializeInvaders() {
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 11; j++) {
-			invaders[i][j] = new Invader(sStartX + (j*50), sStartY + sDeltaY * i);
+			int newX = sStartX + (j*50);
+			int newY = sStartY + sDeltaY * i;
+			invaders[i][j] = new Invader(newX, newY);
 		}
 	}
 }
