@@ -1,7 +1,7 @@
 public class InvaderBlock {
 	private final int BORDER = 40;
-	private final int DELTA_X = 50;
-	private final int DELTA_Y = 60;
+	private final int X_SPACING = 50;
+	private final int Y_SPACING = 60;
 
 	private Invader[][] block;
 	private int blockWidth;
@@ -32,8 +32,8 @@ public class InvaderBlock {
 
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
-				int x = this.startX + j * DELTA_X;
-				int y = this.startY + i * DELTA_Y;
+				int x = this.startX + j * X_SPACING;
+				int y = this.startY + i * Y_SPACING;
 				this.block[i][j] = new Invader(x, y);
 			}
 		}
