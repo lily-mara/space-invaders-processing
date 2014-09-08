@@ -8,6 +8,7 @@ public class InvaderBlock {
 	private int blockHeight;
 	private int startX;
 	private int startY;
+
 	private int lastUpdate;
 	private int delay;
 
@@ -47,7 +48,7 @@ public class InvaderBlock {
 			}
 		}
 	}
-	
+
 	public void update() {
 		if (this.flipCheck()) {
 			this.flip();
@@ -59,19 +60,19 @@ public class InvaderBlock {
 			}
 		}
 	}
-	
+
 	public boolean flipCheck() {
 		if (this.getRightmost().getX() >= width-BORDER) {
 			return true;
 		}
-		
+
 		if (this.getLeftmost().getX() <= BORDER) {
 			return true;
 		}
 
 		return false;
 	}
-	
+
 	public Invader getRightmost() {
 		for (int i = this.blockWidth-1; i >= 0; i--) {
 			for (int j = 0; j < this.blockHeight; j++) {
@@ -82,7 +83,7 @@ public class InvaderBlock {
 		}
 		return new Invader(0, 0);
 	}
-	
+
 	public Invader getLeftmost() {
 		for (int i = 0; i < this.blockWidth; i++) {
 			for (int j = 0; j < this.blockHeight; j++) {
@@ -93,7 +94,7 @@ public class InvaderBlock {
 		}
 		return new Invader(0, 0);
 	}
-	
+
 	private void flip() {
 		for (Invader[] i : this.block) {
 			for (Invader j : i) {
