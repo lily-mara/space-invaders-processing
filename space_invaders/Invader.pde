@@ -6,14 +6,20 @@ public class Invader {
 	private boolean isAlive = true;
 	private boolean moveRight = true;
 
+	/**
+	   A single "space invader" object
+	   @param posX the the left bound of this invader
+	   @param posY the right bound of this invader
+	 */
 	public Invader(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
 	}
 
+	/**
+	   Draw this space invader
+	 */
 	void render() {
-		// this massive steaming pile of code creates one Space Invader.
-		// I will not be making the other 5 types...
 		rect(this.posX, this.posY + 5, 28, 8);
 		rect(this.posX, this.posY, 12, 16);
 		rect(this.posX - 12, this.posY + 10, 4, 4);
@@ -34,6 +40,9 @@ public class Invader {
 		rect(this.posX + 20, this.posY + 6, 4, 12);
 	}
 
+	/**
+	   Update the location of this space invader
+	 */
 	void update() {
 		if (this.moveRight) {
 			this.posX += MOVE_FACTOR;
