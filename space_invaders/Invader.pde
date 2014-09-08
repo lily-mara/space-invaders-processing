@@ -1,6 +1,7 @@
 public class Invader {
 	private int posX;
 	private int posY;
+	private boolean isAlive = true;
 
 	public Invader(int posX, int posY) {
 		this.posX = posX;
