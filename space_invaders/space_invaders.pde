@@ -31,7 +31,7 @@ PFont pixelFont;
 PImage roof;
 
 // Array that stores Invaders
-Invader[][] invaders;
+InvaderBlock invaders;
 
 void setup() {
 	size(651, 744);
@@ -41,27 +41,7 @@ void setup() {
 
 	FormatText();
 	noStroke();
-	invaders = new Invader[5][11];
-	initializeInvaders();
-}
-
-void initializeInvaders() {
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 11; j++) {
-			int newX = sStartX + (j*50);
-			int newY = sStartY + sDeltaY * i;
-			invaders[i][j] = new Invader(newX, newY);
-		}
-	}
-}
-
-void renderInvaders() {
-	for (Invader[] i : invaders) {
-		for (Invader j : i) {
-			j.render();
-			j.update();
-		}
-	}
+	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
 }
 
 void draw() {
@@ -70,7 +50,7 @@ void draw() {
 	ShotChecker();
 	RenderGUI();
 	DrawRoofs();
-	renderInvaders();
+	invaders.render();
 }
 
 void TextLine(String inputText, int inputLine) {
