@@ -30,26 +30,19 @@ int shotY;
 PFont pixelFont;
 PImage roof;
 
-// Arrays that store positions of the Invaders
-int[] row1X = new int[11];
-int[] row2X = new int[11];
-int[] row3X = new int[11];
-int[] row4X = new int[11];
-int[] row5X = new int[11];
-
-int[] row1Y = new int[11];
-int[] row2Y = new int[11];
-int[] row3Y = new int[11];
-int[] row4Y = new int[11];
-int[] row5Y = new int[11];
+// Array that stores Invaders
+Invader[][] invaders;
 
 void setup() {
+	size(651, 744);
+
 	pixelFont = loadFont("Courier.vlw");
 	roof = loadImage("roof.png");
 
-	size(651, 744);
 	FormatText();
 	noStroke();
+	invaders = new Invader[5][11];
+	initializeInvaders();
 }
 
 void draw() {
