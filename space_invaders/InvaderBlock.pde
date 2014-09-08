@@ -113,7 +113,7 @@ public class InvaderBlock {
 		@return true if height has been breached false otherwise
 	 */
 	public boolean belowHeight(int height) {
-		return this.getLowest().getY() <= height;
+		return this.getLowest().getY() >= height;
 	}
 	
 	
