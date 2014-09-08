@@ -1,5 +1,5 @@
 public class Invader {
-	private final int MOVE_FACTOR = 1;
+	private final int MOVE_FACTOR = 3;
 	private final int LEVEL = 10;
 
 	private int posX;
