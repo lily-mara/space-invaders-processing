@@ -49,15 +49,37 @@ public class InvaderBlock {
 	}
 	
 	public boolean flipCheck() {
-		if (this.block[0][this.blockWidth-1].getX() >= width-BORDER) {
+		if (this.getRightmost().getX() >= width-BORDER) {
 			return true;
 		}
 		
-		if (this.block[0][0].getX() <= BORDER) {
+		if (this.getLeftmost().getX() <= BORDER) {
 			return true;
 		}
 
 		return false;
+	}
+	
+	public Invader getRightmost() {
+		for (int i = this.blockWidth-1; i >= 0; i--) {
+			for (int j = 0; j < this.blockHeight; j++) {
+				if (this.block[j][i].isAlive()) {
+					return this.block[j][i];
+				}
+			}
+		}
+		return new Invader(0, 0);
+	}
+	
+	public Invader getLeftmost() {
+		for (int i = 0; i < this.blockWidth; i++) {
+			for (int j = 0; j < this.blockHeight; j++) {
+				if (this.block[j][i].isAlive()) {
+					return this.block[j][i];
+				}
+			}
+		}
+		return new Invader(0, 0);
 	}
 	
 	private void flip() {
