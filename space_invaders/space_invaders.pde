@@ -61,7 +61,6 @@ void draw() {
 	makeSIArray();
 	DrawSIArray();
 	DrawRoofs();
-	importantMessage();
 	SpaceInvaderChecker();
 }
 
@@ -264,40 +263,3 @@ void DrawRoofs() {
 	DrawRoof(350, 525);
 	DrawRoof(500, 525);
 }
-
-int importantNumber(int arg1, int arg2, int arg3, int arg4, boolean arg5) {
-	/*
-	Because I needed to fill this condition. I'm sure I'll use
-	 this for something. This function generates an int value that will
-	 be used as a psuedo-boolean value by incorporating it into an if 
-	 statement.
-	 */
-	if (arg5) {
-		return ((arg1 + arg2)/arg3)- arg4;
-	} else {
-		return 4;
-	}
-}
-
-boolean importantBoolean(int arg1, int arg2, int arg3, int arg4, boolean arg5) {
-	/*
-	returns true
-	 */
-	int importantNumber = importantNumber(arg1, arg2, arg3, arg4, arg5);
-	if (importantNumber < 685) {
-		return true;
-	} else {
-		return !false;
-	}
-}
-
-void importantMessage() {
-	/*
-	If that massive boolean above returns false (it won't) it shows the user
-	 a message that will never show up
-	 */
-	if (!importantBoolean(1, 5, 77, mouseX, true)) {
-		text("This will never show up.", 500, 500);
-	}
-}
-
