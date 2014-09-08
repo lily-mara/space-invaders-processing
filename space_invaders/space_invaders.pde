@@ -56,7 +56,7 @@ void draw() {
 		invaders.render();
 		invaders.update();
 
-		if (invaders.belowHeight(height)) {
+		if (invaders.belowHeight(500)) {
 		  gameOver = true;
 		}
 	} else {
