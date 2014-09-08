@@ -14,6 +14,7 @@ public class InvaderBlock {
 
 	/**
 	   An instance of InvaderBlock class is a collection of Invader objects
+
 	   @param blockWidth the number of invaders in each row of block
 	   @param blockHeight the number of invaders in each column of block
 	   @param startX the initial left boundary of the block
