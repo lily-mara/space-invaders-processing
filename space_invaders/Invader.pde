@@ -1,7 +1,10 @@
 public class Invader {
+	private final int MOVE_FACTOR = 2;
+
 	private int posX;
 	private int posY;
 	private boolean isAlive = true;
+	private boolean moveRight = true;
 
 	public Invader(int posX, int posY) {
 		this.posX = posX;
@@ -29,6 +32,14 @@ public class Invader {
 		rect(this.posX + 16, this.posY - 0, 4, 8);
 		rect(this.posX - 20, this.posY + 6, 4, 12);
 		rect(this.posX + 20, this.posY + 6, 4, 12);
+	}
+
+	void update() {
+		if (this.moveRight) {
+			this.posX += MOVE_FACTOR;
+		} else {
+			this.posX -= MOVE_FACTOR;
+		}
 	}
 
 }

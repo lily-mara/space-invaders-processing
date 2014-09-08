@@ -59,6 +59,7 @@ void renderInvaders() {
 	for (Invader[] i : invaders) {
 		for (Invader j : i) {
 			j.render();
+			j.update();
 		}
 	}
 }
