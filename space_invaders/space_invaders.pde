@@ -53,12 +53,21 @@ void initializeInvaders() {
 	}
 }
 
+void renderInvaders() {
+	for (Invader[] i : invaders) {
+		for (Invader j : i) {
+			j.render();
+		}
+	}
+}
+
 void draw() {
 	background(0);
 	CreatePlayer(mouseX, height - 100);
 	ShotChecker();
 	RenderGUI();
 	DrawRoofs();
+	renderInvaders();
 }
 
 void TextLine(String inputText, int inputLine) {
