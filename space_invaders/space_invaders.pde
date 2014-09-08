@@ -33,6 +33,8 @@ PImage roof;
 // Array that stores Invaders
 InvaderBlock invaders;
 
+int lastUpdate = 0;
+
 void setup() {
 	size(651, 744);
 
@@ -51,6 +53,10 @@ void draw() {
 	RenderGUI();
 	DrawRoofs();
 	invaders.render();
+	if (millis() > lastUpdate + 100) {
+		invaders.update();
+		lastUpdate = millis();
+	}
 }
 
 void TextLine(String inputText, int inputLine) {

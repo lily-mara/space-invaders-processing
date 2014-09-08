@@ -36,13 +36,20 @@ public class InvaderBlock {
 	   Draws every Invader object in this InvaderBlock
 	 */
 	public void render() {
+		for (Invader[] i : this.block) {
+			for (Invader j : i) {
+				j.render();
+			}
+		}
+	}
+	
+	public void update() {
 		if (this.flipCheck()) {
 			this.flip();
 		}
 
 		for (Invader[] i : this.block) {
 			for (Invader j : i) {
-				j.render();
 				j.update();
 			}
 		}
