@@ -11,7 +11,6 @@ Nate Mara
  */
 
 // Triggers a user can change
-boolean isSpaceInvaders = true;
 int textStartY = 720/2;
 final int textLineSpacing = 30;
 final int shotSpeed = 9;
@@ -61,25 +60,6 @@ void draw() {
 	makeSIArray();
 	DrawSIArray();
 	DrawRoofs();
-	SpaceInvaderChecker();
-}
-
-void SpaceInvaderChecker() {
-	/*
-	Checks to see if the user was bold enough to change the 
-	 "isSpaceInvaders" boolean value
-	 */
-
-	if (!isSpaceInvaders) {
-		background(0);
-		textSize(20);
-		TextLine("Well look at you, messing with source code,", -1);
-		TextLine("thinking you\'re soooo great.", 0);
-		TextLine("Tell me, what exactly did you think would happen,", 1);
-		TextLine("When you changed the value of ", 2);
-		TextLine("\"isSpaceInvaders\" from true to false?", 3);
-		TextLine("Did you think that PacMan would start?", 5);
-	}
 }
 
 void TextLine(String inputText, int inputLine) {
