@@ -5,6 +5,13 @@ public class InvaderBlock {
 	private int startX;
 	private int startY;
 
+	/**
+	   An instance of InvaderBlock class is a collection of Invader objects
+	   @param width the number of invaders in each row of block
+	   @param height the number of invaders in each column of block
+	   @param startX the initial left boundary of the block
+	   @param startY the initial upper boundary of the block
+	*/
 	public InvaderBlock(int width, int height, int startX, int startY) {
 		this.block = new Invader[height][width];
 		this.startX = startX;
@@ -21,6 +28,9 @@ public class InvaderBlock {
 		}
 	}
 
+	/**
+	   Draws every Invader object in this InvaderBlock
+	 */
 	public void render() {
 		for (Invader[] i : this.block) {
 			for (Invader j : i) {
