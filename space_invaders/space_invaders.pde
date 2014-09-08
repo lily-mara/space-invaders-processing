@@ -1,3 +1,5 @@
+/* @pjs preload="roof.png"; */
+
 /*
 Nate Mara
  2013-10-12
