@@ -1,5 +1,7 @@
 public class InvaderBlock {
 	private final int BORDER = 40;
+	private final int DELTA_X = 50;
+	private final int DELTA_Y = 75;
 
 	private Invader[][] block;
 	private int blockWidth;
@@ -23,9 +25,9 @@ public class InvaderBlock {
 
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
-				int newX = this.startX + (j*50);
-				int newY = this.startY + sDeltaY * i;
-				this.block[i][j] = new Invader(newX, newY);
+				int x = this.startX + j * DELTA_X;
+				int y = this.startY + i * DELTA_Y;
+				this.block[i][j] = new Invader(x, y);
 			}
 		}
 	}
@@ -54,6 +56,7 @@ public class InvaderBlock {
 		for (Invader[] i : this.block) {
 			for (Invader j : i) {
 				j.flip();
+				j.downLevel();
 			}
 		}
 	}

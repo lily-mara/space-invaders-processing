@@ -1,5 +1,6 @@
 public class Invader {
 	private final int MOVE_FACTOR = 1;
+	private final int LEVEL = 10;
 
 	private int posX;
 	private int posY;
@@ -56,6 +57,10 @@ public class Invader {
 		} else {
 			this.posX -= MOVE_FACTOR;
 		}
+	}
+
+	public void downLevel() {
+		this.posY += LEVEL;
 	}
 
 	public int getX() {
