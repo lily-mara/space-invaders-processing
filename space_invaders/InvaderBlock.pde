@@ -49,6 +49,10 @@ public class InvaderBlock {
 		}
 	}
 
+	/**
+	   If the appropriate delay has elapsed, then update the positions
+	   of the invaders in this block
+	 */
 	public void update() {
 		if (millis() > this.lastUpdate + this.delay) {
 			this.lastUpdate = millis();
@@ -65,6 +69,12 @@ public class InvaderBlock {
 		}
 	}
 
+	/**
+	   Check if this block needs to be flipped (if the left/rightmost
+	   invader has reached a border)
+
+	   @return true if the block needs to be flipped, false otherwise
+	 */
 	public boolean flipCheck() {
 		if (this.getRightmost().getX() >= width-BORDER) {
 			return true;
@@ -77,6 +87,12 @@ public class InvaderBlock {
 		return false;
 	}
 
+	/**
+	   Returns the rightmost Invader in this block that is alive (no
+	   assumptions should be made about the height of the Invader)
+
+	   @return rightmost Invader in this block
+	 */
 	public Invader getRightmost() {
 		for (int i = this.blockWidth-1; i >= 0; i--) {
 			for (int j = 0; j < this.blockHeight; j++) {
@@ -88,6 +104,12 @@ public class InvaderBlock {
 		return new Invader(0, 0);
 	}
 
+	/**
+	   Returns the leftmost Invader in this block that is alive (no
+	   assumptions should be made about the height of the Invader)
+
+	   @return leftmost Invader in this block
+	 */
 	public Invader getLeftmost() {
 		for (int i = 0; i < this.blockWidth; i++) {
 			for (int j = 0; j < this.blockHeight; j++) {
@@ -99,7 +121,16 @@ public class InvaderBlock {
 		return new Invader(0, 0);
 	}
 
+	/**
+	   If the block is moving right, make it move left and
+	   vice-versa. Also, decrease the delay by 20ms, and move the
+	   block down a level.
+	 */
 	private void flip() {
+		if (this.delay > 0) {
+			this.delay -= 20;
+		}
+
 		for (Invader[] i : this.block) {
 			for (Invader j : i) {
 				j.flip();
