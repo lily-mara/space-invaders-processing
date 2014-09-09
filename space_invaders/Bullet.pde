@@ -24,6 +24,16 @@ public class Bullet {
 		this.invaders = new ArrayList<Invader>();
 	}
 
+	public void update() {
+		this.y -= this.SPEED;
+		this.checkCollide();
+
+		if (this.alive) {
+			fill(255);
+			rect(this.x, this.y, 5, 20);
+		}
+	}
+
 	/**
 	   If this is not alive, then make it alive and set the position
 	   to the positiion of the parent Player object
