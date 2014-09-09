@@ -55,7 +55,7 @@ void draw() {
 		DrawRoofs();
 		invaders.render();
 		invaders.update();
-		player.render(mouseX, mouseY);
+		player.update();
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
