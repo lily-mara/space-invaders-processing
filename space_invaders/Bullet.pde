@@ -42,7 +42,14 @@ public class Bullet {
 	}
 
 	private boolean collidesWith(Invader check) {
-		return false;
+		int tolerance = 3;
+
+		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
+		boolean inRight = this.x <= (check.getX() + 16 + tolerance);
+		boolean inTop = this.y <= (check.getY() - 23 + tolerance);
+		boolean inBottom = this.y >= (check.getY() + 23 + tolerance);
+
+		return inLeft && inRight && inTop && inBottom;
 	}
 
 	public boolean isAlive() {
