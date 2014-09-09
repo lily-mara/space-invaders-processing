@@ -31,7 +31,18 @@ public class Bullet {
 	}
 
 	public void checkCollide() {
+		for (int i = 0; i < this.invaders.size(); i++) {
+			Invader current = this.invaders.get(i);
+			if (this.collidesWith(current)) {
+				current.kill();
+				this.alive = false;
+				this.parent.addToScore(50);
+			}
+		}
+	}
 
+	private boolean collidesWith(Invader check) {
+		return false;
 	}
 
 	public boolean isAlive() {
