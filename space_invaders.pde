@@ -18,7 +18,6 @@ final int textLineSpacing = 30;
 final int shotSpeed = 9;
 int sStartY = 100;
 int sStartX = 75;
-int sDeltaY = 75;
 
 // Variables that the program uses
 boolean shotExists = false;
@@ -34,6 +33,7 @@ PImage roof;
 
 // Array that stores Invaders
 InvaderBlock invaders;
+Player player;
 
 boolean gameOver = false;
 
@@ -46,22 +46,26 @@ void setup() {
 	FormatText();
 	noStroke();
 	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
+	player = new Player();
+
+	player.addInvaders(invaders.getInvaders());
 }
 
 void draw() {
 	if (!gameOver) {
 		background(0);
-		CreatePlayer(mouseX, height - 100);
 		ShotChecker();
 		RenderGUI();
 		DrawRoofs();
 		invaders.render();
 		invaders.update();
+		player.update();
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
 		}
 	} else {
+		fill(#FF6600);
 		TextLine("GAME OVER", 5);
 	}
 }
@@ -83,45 +87,6 @@ void FormatText() {
 	textSize(30);
 }
 
-void DrawPlayer(int posX, int posY) {
-	/*
-	Draws the player "space ship" at the coordinates given by the 
-	 parameters. posX refers to the X coordinate of the center of the
-	 player, and posY refers to the Y coordinate of the top of the player.
-	 */
-	fill(#00FC00);
-
-	rectMode(CENTER);
-	rect(posX, posY + 20, 52, 16);
-	rect(posX, posY + 10, 44, 04);
-	rect(posX, posY + 06, 12, 8);
-	rect(posX, posY + 00, 4, 4);
-}
-
-void CreatePlayer(int posX, int posY) {
-	/*
-	Compares the "posX" and "posY" parameters to various boundaries
-	 and draws the player depending on those conditionals.
-	 */
-	int leftBarrier = 30;
-	int rightBarrier = width - 30;
-	playerPosY = posY;
-
-	if (posX > leftBarrier && posX < rightBarrier) {
-		playerPosX = posX;
-
-		DrawPlayer(posX, posY);
-	} else if (posX < leftBarrier) {
-		playerPosX = leftBarrier;
-
-		DrawPlayer(leftBarrier, posY);
-	} else if (posX > rightBarrier) {
-		playerPosX = rightBarrier;
-
-		DrawPlayer(rightBarrier, posY);
-	}
-}
-
 void Shoot(int posX) {
 	/*
 	creates laser shot at the "posX" parameter
@@ -134,11 +99,7 @@ void mousePressed() {
 	/*
 	If a laser shot doesn't exist, creates one
 	 */
-	if (!shotExists) {
-		shotX = playerPosX;
-		shotY = playerPosY - 10;
-		shotExists = true;
-	}
+	player.shoot();
 }
 
 void ShotChecker() {
@@ -190,6 +151,113 @@ void DrawRoofs() {
 	DrawRoof(350, 525);
 	DrawRoof(500, 525);
 }
+import java.util.ArrayList;
+
+public class Bullet {
+	public final int SPEED = 15;
+
+	private boolean alive;
+	private Player parent;
+	private int x;
+	private int y;
+	private ArrayList<Invader> invaders;
+
+	/**
+	   Construct a new Bullet object with the given Player object as
+	   the parent
+
+	   @param parent the Player object to make the parent of this Bullet
+	 */
+	public Bullet(Player parent) {
+		this.x = 0;
+		this.y = 0;
+
+		this.parent = parent;
+		this.alive = false;
+		this.invaders = new ArrayList<Invader>();
+	}
+
+	public void update() {
+		if (this.alive) {
+			this.y -= this.SPEED;
+			this.checkCollide();
+			fill(255);
+			rect(this.x, this.y, 5, 20);
+		}
+		
+		if (this.y < -10) {
+			this.alive = false;
+		}
+	}
+
+	/**
+	   If this is not alive, then make it alive and set the position
+	   to the positiion of the parent Player object
+	 */
+	public void spawn() {
+		if (!this.alive) {
+			this.x = this.parent.getX();
+			this.y = this.parent.getY();
+			this.alive = true;
+		}
+	}
+
+	/**
+	   Add the given Invader to the ArrayList of Invaders that this
+	   stores for collision detection
+
+	   @param toAdd the Invader to add
+	 */
+	public void addInvader(Invader toAdd) {
+		this.invaders.add(toAdd);
+	}
+
+	/**
+	   Check the current position of this and compare it to the
+	   position of all of the Invaders to detect a collision.
+
+	   If a collision is detected, kill the colliding Invader, stop
+	   displaying this and increase the score
+	 */
+	public void checkCollide() {
+		for (int i = 0; i < this.invaders.size(); i++) {
+			Invader current = this.invaders.get(i);
+			if (current.isAlive()) {
+				if (this.collidesWith(current)) {
+					current.kill();
+					this.alive = false;
+					this.parent.addToScore(50);
+				}
+			}
+		}
+	}
+
+	/**
+	   Returns true if this bullet collides with the given Invader,
+	   false otherwise
+
+	   @param check the Invader to check if this collides
+	   @return true if this bullet collides with the given Invader
+	 */
+	private boolean collidesWith(Invader check) {
+		int tolerance = 3;
+
+		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
+		boolean inRight = this.x <= (check.getX() + 16 + tolerance);
+		boolean inTop = this.y >= (check.getY() - 23 + tolerance);
+		boolean inBottom = this.y <= (check.getY() + 23 + tolerance);
+
+		return inLeft && inRight && inTop && inBottom;
+	}
+
+	/**
+	   Returns the instance variable `alive`
+	   @return the instance variable `alive`
+	 */
+	public boolean isAlive() {
+		return this.alive;
+	}
+}
 public class Invader {
 	private final int MOVE_FACTOR = 3;
 	private final int LEVEL = 10;
@@ -213,24 +281,33 @@ public class Invader {
 	   Draw this space invader
 	 */
 	public void render() {
-		rect(this.posX, this.posY + 5, 28, 8);
-		rect(this.posX, this.posY, 12, 16);
-		rect(this.posX - 12, this.posY + 10, 4, 4);
-		rect(this.posX + 12, this.posY + 10, 4, 4);
-		rect(this.posX - 6, this.posY + 14, 8, 4);
-		rect(this.posX + 6, this.posY + 14, 8, 4);
-		rect(this.posX - 8, this.posY - 10, 4, 4);
-		rect(this.posX + 8, this.posY - 10, 4, 4);
-		rect(this.posX - 12, this.posY - 14, 4, 4);
-		rect(this.posX + 12, this.posY - 14, 4, 4);
-		rect(this.posX - 10, this.posY - 6, 8, 4);
-		rect(this.posX + 10, this.posY - 6, 8, 4);
-		rect(this.posX - 12, this.posY - 1, 4, 6);
-		rect(this.posX + 12, this.posY - 1, 4, 6);
-		rect(this.posX - 16, this.posY - 0, 4, 8);
-		rect(this.posX + 16, this.posY - 0, 4, 8);
-		rect(this.posX - 20, this.posY + 6, 4, 12);
-		rect(this.posX + 20, this.posY + 6, 4, 12);
+		if (this.alive) {
+			rect(this.posX, this.posY + 5, 28, 8);
+			rect(this.posX, this.posY, 12, 16);
+			rect(this.posX - 12, this.posY + 10, 4, 4);
+			rect(this.posX + 12, this.posY + 10, 4, 4);
+			rect(this.posX - 6, this.posY + 14, 8, 4);
+			rect(this.posX + 6, this.posY + 14, 8, 4);
+			rect(this.posX - 8, this.posY - 10, 4, 4);
+			rect(this.posX + 8, this.posY - 10, 4, 4);
+			rect(this.posX - 12, this.posY - 14, 4, 4);
+			rect(this.posX + 12, this.posY - 14, 4, 4);
+			rect(this.posX - 10, this.posY - 6, 8, 4);
+			rect(this.posX + 10, this.posY - 6, 8, 4);
+			rect(this.posX - 12, this.posY - 1, 4, 6);
+			rect(this.posX + 12, this.posY - 1, 4, 6);
+			rect(this.posX - 16, this.posY - 0, 4, 8);
+			rect(this.posX + 16, this.posY - 0, 4, 8);
+			rect(this.posX - 20, this.posY + 6, 4, 12);
+			rect(this.posX + 20, this.posY + 6, 4, 12);
+		}
+	}
+
+	/**
+	   sets the life status to false
+	 */
+	public void kill() {
+		this.alive = false;
 	}
 
 	/**
@@ -254,7 +331,7 @@ public class Invader {
 	public void downLevel() {
 		this.posY += LEVEL;
 	}
-	
+
 	public boolean isAlive() {
 		return this.alive;
 	}
@@ -385,8 +462,21 @@ public class InvaderBlock {
 	public boolean belowHeight(int height) {
 		return this.getLowest().getY() >= height;
 	}
-	
-	
+
+	public Invader[] getInvaders() {
+		Invader[] invaderArray = new Invader[this.blockWidth*this.blockHeight];
+		int index = 0;
+		for (int i = 0; i < this.blockWidth; i++) {
+			for (int j = 0; j < this.blockHeight; j++) {
+				invaderArray[index] = this.block[j][i];
+				index++;
+			}
+		}
+
+		return invaderArray;
+
+	}
+
 	/**
 	   Returns the leftmost Invader in this block that is alive (no
 	   assumptions should be made about the X of the Invader)
@@ -437,6 +527,90 @@ public class InvaderBlock {
 				j.downLevel();
 			}
 		}
+	}
+}
+public class Player {
+
+	private int x;
+	private int y;
+	private int score;
+	private int lives;
+	private Bullet child;
+
+	public Player() {
+		this.x = x;
+		this.y = y;
+		this.score = 0;
+		this.lives = 5;
+		this.child = new Bullet(this);
+	}
+
+
+	private void render(int posX, int posY) {
+	/*
+		Draws the player "space ship" at the coordinates given by the
+		 parameters. posX refers to the X coordinate of the center of the
+		 player, and posY refers to the Y coordinate of the top of the player.
+		 */
+		fill(#00FC00);
+
+		rectMode(CENTER);
+		rect(posX, posY + 20, 52, 16);
+		rect(posX, posY + 10, 44, 04);
+		rect(posX, posY + 06, 12, 8);
+		rect(posX, posY + 00, 4, 4);
+	}
+
+	public void shoot() {
+		this.child.spawn();
+	}
+
+	public void update() {
+		this.child.update();
+
+		this.x = mouseX;
+		this.y = height - 100;
+
+		int leftBarrier = 30;
+		int rightBarrier = width - 30;
+
+		if (this.x > leftBarrier && this.x < rightBarrier) {
+			this.render(this.x, this.y);
+		} else if (this.x < leftBarrier) {
+			this.render(leftBarrier, this.y);
+		} else if (this.x > rightBarrier) {
+			this.render(rightBarrier, this.y);
+		}
+	}
+
+	public void addInvaders(Invader[] invaders) {
+		for (Invader i : invaders) {
+			this.child.addInvader(i);
+		}
+	}
+
+	public int getScore() {
+		return this.score;
+	}
+
+	public int getLives() {
+		return this.lives;
+	}
+
+	public void kill() {
+		this.lives--;
+	}
+
+	public void addToScore(int score) {
+		this.score += score;
+	}
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
 	}
 }
 
