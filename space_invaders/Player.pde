@@ -66,4 +66,12 @@ public class Player {
 	public void addToScore(int score) {
 		this.score += score;
 	}
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
 }
