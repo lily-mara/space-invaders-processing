@@ -42,6 +42,13 @@ public class Invader {
 	}
 
 	/**
+	   sets the life status to false
+	 */
+	public void kill() {
+		this.alive = false;
+	}
+
+	/**
 	   Reverse the direction of this space invader
 	 */
 	public void flip() {
