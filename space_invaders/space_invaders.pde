@@ -31,6 +31,7 @@ PImage roof;
 
 // Array that stores Invaders
 InvaderBlock invaders;
+Player player;
 
 boolean gameOver = false;
 
@@ -43,6 +44,7 @@ void setup() {
 	FormatText();
 	noStroke();
 	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
+	player = new Player();
 }
 
 void draw() {
@@ -54,6 +56,7 @@ void draw() {
 		DrawRoofs();
 		invaders.render();
 		invaders.update();
+		player.render();
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
@@ -96,11 +99,7 @@ void mousePressed() {
 	/*
 	If a laser shot doesn't exist, creates one
 	 */
-	if (!shotExists) {
-		shotX = playerPosX;
-		shotY = playerPosY - 10;
-		shotExists = true;
-	}
+	player.shoot();
 }
 
 void ShotChecker() {
