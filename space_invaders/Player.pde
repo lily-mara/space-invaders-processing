@@ -52,6 +52,12 @@ public class Player {
 		}
 	}
 
+	public void addInvaders(Invader[] invaders) {
+		for (Invader i : invaders) {
+			this.child.addInvader(i);
+		}
+	}
+
 	public int getScore() {
 		return this.score;
 	}
