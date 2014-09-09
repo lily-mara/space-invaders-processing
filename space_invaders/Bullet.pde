@@ -71,7 +71,6 @@ public class Bullet {
 			Invader current = this.invaders.get(i);
 			if (current.isAlive()) {
 				if (this.collidesWith(current)) {
-					println("COLLIDE");
 					current.kill();
 					this.alive = false;
 					this.parent.addToScore(50);
