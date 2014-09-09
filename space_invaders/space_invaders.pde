@@ -81,43 +81,7 @@ void FormatText() {
 	textSize(30);
 }
 
-void DrawPlayer(int posX, int posY) {
-	/*
-	Draws the player "space ship" at the coordinates given by the 
-	 parameters. posX refers to the X coordinate of the center of the
-	 player, and posY refers to the Y coordinate of the top of the player.
-	 */
-	fill(#00FC00);
 
-	rectMode(CENTER);
-	rect(posX, posY + 20, 52, 16);
-	rect(posX, posY + 10, 44, 04);
-	rect(posX, posY + 06, 12, 8);
-	rect(posX, posY + 00, 4, 4);
-}
-
-void CreatePlayer(int posX, int posY) {
-	/*
-	Compares the "posX" and "posY" parameters to various boundaries
-	 and draws the player depending on those conditionals.
-	 */
-	int leftBarrier = 30;
-	int rightBarrier = width - 30;
-	playerPosY = posY;
-
-	if (posX > leftBarrier && posX < rightBarrier) {
-		playerPosX = posX;
-
-		DrawPlayer(posX, posY);
-	} else if (posX < leftBarrier) {
-		playerPosX = leftBarrier;
-
-		DrawPlayer(leftBarrier, posY);
-	} else if (posX > rightBarrier) {
-		playerPosX = rightBarrier;
-
-		DrawPlayer(rightBarrier, posY);
-	}
 }
 
 void Shoot(int posX) {
