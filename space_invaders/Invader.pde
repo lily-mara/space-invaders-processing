@@ -21,24 +21,33 @@ public class Invader {
 	   Draw this space invader
 	 */
 	public void render() {
-		rect(this.posX, this.posY + 5, 28, 8);
-		rect(this.posX, this.posY, 12, 16);
-		rect(this.posX - 12, this.posY + 10, 4, 4);
-		rect(this.posX + 12, this.posY + 10, 4, 4);
-		rect(this.posX - 6, this.posY + 14, 8, 4);
-		rect(this.posX + 6, this.posY + 14, 8, 4);
-		rect(this.posX - 8, this.posY - 10, 4, 4);
-		rect(this.posX + 8, this.posY - 10, 4, 4);
-		rect(this.posX - 12, this.posY - 14, 4, 4);
-		rect(this.posX + 12, this.posY - 14, 4, 4);
-		rect(this.posX - 10, this.posY - 6, 8, 4);
-		rect(this.posX + 10, this.posY - 6, 8, 4);
-		rect(this.posX - 12, this.posY - 1, 4, 6);
-		rect(this.posX + 12, this.posY - 1, 4, 6);
-		rect(this.posX - 16, this.posY - 0, 4, 8);
-		rect(this.posX + 16, this.posY - 0, 4, 8);
-		rect(this.posX - 20, this.posY + 6, 4, 12);
-		rect(this.posX + 20, this.posY + 6, 4, 12);
+		if (this.alive) {
+			rect(this.posX, this.posY + 5, 28, 8);
+			rect(this.posX, this.posY, 12, 16);
+			rect(this.posX - 12, this.posY + 10, 4, 4);
+			rect(this.posX + 12, this.posY + 10, 4, 4);
+			rect(this.posX - 6, this.posY + 14, 8, 4);
+			rect(this.posX + 6, this.posY + 14, 8, 4);
+			rect(this.posX - 8, this.posY - 10, 4, 4);
+			rect(this.posX + 8, this.posY - 10, 4, 4);
+			rect(this.posX - 12, this.posY - 14, 4, 4);
+			rect(this.posX + 12, this.posY - 14, 4, 4);
+			rect(this.posX - 10, this.posY - 6, 8, 4);
+			rect(this.posX + 10, this.posY - 6, 8, 4);
+			rect(this.posX - 12, this.posY - 1, 4, 6);
+			rect(this.posX + 12, this.posY - 1, 4, 6);
+			rect(this.posX - 16, this.posY - 0, 4, 8);
+			rect(this.posX + 16, this.posY - 0, 4, 8);
+			rect(this.posX - 20, this.posY + 6, 4, 12);
+			rect(this.posX + 20, this.posY + 6, 4, 12);
+		}
+	}
+
+	/**
+	   sets the life status to false
+	 */
+	public void kill() {
+		this.alive = false;
 	}
 
 	/**
@@ -62,7 +71,7 @@ public class Invader {
 	public void downLevel() {
 		this.posY += LEVEL;
 	}
-	
+
 	public boolean isAlive() {
 		return this.alive;
 	}
