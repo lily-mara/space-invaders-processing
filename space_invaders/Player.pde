@@ -30,6 +30,10 @@ public class Player {
 		rect(posX, posY + 00, 4, 4);
 	}
 
+	public void shoot() {
+		this.child.spawn();
+	}
+
 	public void update() {
 		this.x = mouseX;
 		this.y = mouseY;
