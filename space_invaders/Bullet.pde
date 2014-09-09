@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Bullet {
-	public final int SPEED = 4;
+	public final int SPEED = 15;
 
 	private boolean alive;
 	private Player parent;
@@ -30,6 +30,10 @@ public class Bullet {
 			this.checkCollide();
 			fill(255);
 			rect(this.x, this.y, 5, 20);
+		}
+		
+		if (this.y < -10) {
+			this.alive = false;
 		}
 	}
 
