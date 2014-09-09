@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Bullet {
 	public final int SPEED = 4;
 
@@ -5,6 +7,7 @@ public class Bullet {
 	private Player parent;
 	private int x;
 	private int y;
+	private ArrayList<Invader> invaders;
 
 	public Bullet(Player parent) {
 		this.x = 0;
@@ -12,6 +15,7 @@ public class Bullet {
 
 		this.parent = parent;
 		this.alive = false;
+		this.invaders = new ArrayList<Invader>();
 	}
 
 	public void spawn() {
