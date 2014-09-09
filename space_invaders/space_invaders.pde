@@ -62,6 +62,7 @@ void draw() {
 		  gameOver = true;
 		}
 	} else {
+		fill(#FF6600);
 		TextLine("GAME OVER", 5);
 	}
 }
