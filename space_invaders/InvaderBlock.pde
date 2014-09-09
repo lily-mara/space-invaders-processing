@@ -116,6 +116,20 @@ public class InvaderBlock {
 		return this.getLowest().getY() >= height;
 	}
 
+	public Invader[] getInvaders() {
+		Invader[] invaderArray = new Invader[this.blockWidth*this.blockHeight];
+		int index = 0;
+		for (int i = 0; i < this.blockWidth; i++) {
+			for (int j = 0; j < this.blockHeight; j++) {
+				invaderArray[index] = this.block[j][i];
+				index++;
+			}
+		}
+
+		return invaderArray;
+
+	}
+
 	/**
 	   Returns the leftmost Invader in this block that is alive (no
 	   assumptions should be made about the X of the Invader)
