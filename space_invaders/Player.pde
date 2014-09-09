@@ -15,7 +15,7 @@ public class Player {
 	}
 
 
-	public void render(int posX, int posY) {
+	private void render(int posX, int posY) {
 	/*
 		Draws the player "space ship" at the coordinates given by the
 		 parameters. posX refers to the X coordinate of the center of the
@@ -36,7 +36,7 @@ public class Player {
 
 	public void update() {
 		this.x = mouseX;
-		this.y = mouseY;
+		this.y = 50;
 
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
