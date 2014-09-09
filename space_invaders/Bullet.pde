@@ -27,7 +27,7 @@ public class Bullet {
 	}
 
 	public void addInvader(Invader toAdd) {
-
+		this.invaders.add(toAdd);
 	}
 
 	public void checkCollide() {
