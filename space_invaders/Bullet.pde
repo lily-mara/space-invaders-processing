@@ -65,11 +65,13 @@ public class Bullet {
 	public void checkCollide() {
 		for (int i = 0; i < this.invaders.size(); i++) {
 			Invader current = this.invaders.get(i);
-			if (this.collidesWith(current)) {
-				println("COLLIDE");
-				current.kill();
-				this.alive = false;
-				this.parent.addToScore(50);
+			if (current.isAlive()) {
+				if (this.collidesWith(current)) {
+					println("COLLIDE");
+					current.kill();
+					this.alive = false;
+					this.parent.addToScore(50);
+				}
 			}
 		}
 	}
@@ -86,8 +88,8 @@ public class Bullet {
 
 		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
 		boolean inRight = this.x <= (check.getX() + 16 + tolerance);
-		boolean inTop = this.y <= (check.getY() - 23 + tolerance);
-		boolean inBottom = this.y >= (check.getY() + 23 + tolerance);
+		boolean inTop = this.y >= (check.getY() - 23 + tolerance);
+		boolean inBottom = this.y <= (check.getY() + 23 + tolerance);
 
 		return inLeft && inRight && inTop && inBottom;
 	}
