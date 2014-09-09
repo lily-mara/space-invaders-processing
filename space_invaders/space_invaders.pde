@@ -45,6 +45,8 @@ void setup() {
 	noStroke();
 	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
 	player = new Player();
+
+	player.addInvaders(invaders.getInvaders());
 }
 
 void draw() {
