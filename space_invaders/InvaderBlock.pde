@@ -115,8 +115,7 @@ public class InvaderBlock {
 	public boolean belowHeight(int height) {
 		return this.getLowest().getY() >= height;
 	}
-	
-	
+
 	/**
 	   Returns the leftmost Invader in this block that is alive (no
 	   assumptions should be made about the X of the Invader)
