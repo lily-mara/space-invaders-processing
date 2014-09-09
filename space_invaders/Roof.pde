@@ -6,7 +6,7 @@ public class Roof {
 	private static final numPixels = 171;
 	private static final pixelSize = 4;
 
-	public roof(int x, int y,) {
+	public roof(int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		this.rectangles = new Rectangle[numPixels];
