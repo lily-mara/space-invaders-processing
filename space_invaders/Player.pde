@@ -9,8 +9,8 @@ public class Player {
 	public Player() {
 		this.x = x;
 		this.y = y;
-		this.score = score;
-		this.lives = live;
+		this.score = 0;
+		this.lives = 5;
 		this.child = new Bullet(this);
 	}
 
