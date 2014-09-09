@@ -25,10 +25,9 @@ public class Bullet {
 	}
 
 	public void update() {
-		this.y -= this.SPEED;
-		this.checkCollide();
-
 		if (this.alive) {
+			this.y -= this.SPEED;
+			this.checkCollide();
 			fill(255);
 			rect(this.x, this.y, 5, 20);
 		}
@@ -67,6 +66,7 @@ public class Bullet {
 		for (int i = 0; i < this.invaders.size(); i++) {
 			Invader current = this.invaders.get(i);
 			if (this.collidesWith(current)) {
+				println("COLLIDE");
 				current.kill();
 				this.alive = false;
 				this.parent.addToScore(50);
