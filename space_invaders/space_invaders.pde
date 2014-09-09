@@ -50,13 +50,12 @@ void setup() {
 void draw() {
 	if (!gameOver) {
 		background(0);
-		CreatePlayer(mouseX, height - 100);
 		ShotChecker();
 		RenderGUI();
 		DrawRoofs();
 		invaders.render();
 		invaders.update();
-		player.render();
+		player.render(mouseX, mouseY);
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
@@ -82,9 +81,6 @@ void FormatText() {
 	 */
 	textAlign(CENTER);
 	textSize(30);
-}
-
-
 }
 
 void Shoot(int posX) {
