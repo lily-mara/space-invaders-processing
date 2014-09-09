@@ -36,7 +36,7 @@ public class Player {
 
 	public void update() {
 		this.x = mouseX;
-		this.y = 50;
+		this.y = height - 100;
 
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
