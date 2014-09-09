@@ -16,7 +16,6 @@ final int textLineSpacing = 30;
 final int shotSpeed = 9;
 int sStartY = 100;
 int sStartX = 75;
-int sDeltaY = 75;
 
 // Variables that the program uses
 boolean shotExists = false;
