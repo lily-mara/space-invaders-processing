@@ -15,7 +15,11 @@ public class Bullet {
 	}
 
 	public void spawn() {
-
+		if (!this.alive) {
+			this.x = this.parent.getX();
+			this.y = this.parent.getY();
+			this.alive = true;
+		}
 	}
 
 	public void addInvader(Invader toAdd) {
