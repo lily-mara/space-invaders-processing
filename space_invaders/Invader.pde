@@ -4,7 +4,7 @@ public class Invader {
 
 	private int posX;
 	private int posY;
-	private boolean isAlive = true;
+	private boolean alive = true;
 	private boolean moveRight = true;
 
 	/**
@@ -71,7 +71,7 @@ public class Invader {
 	}
 
 	public boolean isAlive() {
-		return this.isAlive;
+		return this.alive;
 	}
 
 	public int getX() {
