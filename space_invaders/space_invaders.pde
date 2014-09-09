@@ -1,3 +1,5 @@
+/* @pjs preload="roof.png"; */
+
 /*
 Nate Mara
  2013-10-12
@@ -16,7 +18,6 @@ final int textLineSpacing = 30;
 final int shotSpeed = 9;
 int sStartY = 100;
 int sStartX = 75;
-int sDeltaY = 75;
 
 // Variables that the program uses
 boolean shotExists = false;
@@ -32,6 +33,7 @@ PImage roof;
 
 // Array that stores Invaders
 InvaderBlock invaders;
+Player player;
 
 boolean gameOver = false;
 
@@ -44,22 +46,26 @@ void setup() {
 	FormatText();
 	noStroke();
 	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
+	player = new Player();
+
+	player.addInvaders(invaders.getInvaders());
 }
 
 void draw() {
 	if (!gameOver) {
 		background(0);
-		CreatePlayer(mouseX, height - 100);
 		ShotChecker();
 		RenderGUI();
 		DrawRoofs();
 		invaders.render();
 		invaders.update();
+		player.update();
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
 		}
 	} else {
+		fill(#FF6600);
 		TextLine("GAME OVER", 5);
 	}
 }
@@ -81,45 +87,6 @@ void FormatText() {
 	textSize(30);
 }
 
-void DrawPlayer(int posX, int posY) {
-	/*
-	Draws the player "space ship" at the coordinates given by the 
-	 parameters. posX refers to the X coordinate of the center of the
-	 player, and posY refers to the Y coordinate of the top of the player.
-	 */
-	fill(#00FC00);
-
-	rectMode(CENTER);
-	rect(posX, posY + 20, 52, 16);
-	rect(posX, posY + 10, 44, 04);
-	rect(posX, posY + 06, 12, 8);
-	rect(posX, posY + 00, 4, 4);
-}
-
-void CreatePlayer(int posX, int posY) {
-	/*
-	Compares the "posX" and "posY" parameters to various boundaries
-	 and draws the player depending on those conditionals.
-	 */
-	int leftBarrier = 30;
-	int rightBarrier = width - 30;
-	playerPosY = posY;
-
-	if (posX > leftBarrier && posX < rightBarrier) {
-		playerPosX = posX;
-
-		DrawPlayer(posX, posY);
-	} else if (posX < leftBarrier) {
-		playerPosX = leftBarrier;
-
-		DrawPlayer(leftBarrier, posY);
-	} else if (posX > rightBarrier) {
-		playerPosX = rightBarrier;
-
-		DrawPlayer(rightBarrier, posY);
-	}
-}
-
 void Shoot(int posX) {
 	/*
 	creates laser shot at the "posX" parameter
@@ -132,11 +99,7 @@ void mousePressed() {
 	/*
 	If a laser shot doesn't exist, creates one
 	 */
-	if (!shotExists) {
-		shotX = playerPosX;
-		shotY = playerPosY - 10;
-		shotExists = true;
-	}
+	player.shoot();
 }
 
 void ShotChecker() {
