@@ -14,10 +14,10 @@ public class Player {
 		this.child = new Bullet(this);
 	}
 
-	
+
 	public void render(int posX, int posY) {
 	/*
-		Draws the player "space ship" at the coordinates given by the 
+		Draws the player "space ship" at the coordinates given by the
 		 parameters. posX refers to the X coordinate of the center of the
 		 player, and posY refers to the Y coordinate of the top of the player.
 		 */
@@ -29,14 +29,14 @@ public class Player {
 		rect(posX, posY + 06, 12, 8);
 		rect(posX, posY + 00, 4, 4);
 	}
-	
+
 	public void update() {
 		this.x = mouseX;
 		this.y = mouseY;
 
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
-		
+
 		if (this.x > leftBarrier && this.x < rightBarrier) {
 			this.render(this.x, this.y);
 		} else if (this.x < leftBarrier) {
@@ -44,9 +44,9 @@ public class Player {
 		} else if (this.x > rightBarrier) {
 			this.render(rightBarrier, this.y);
 		}
-		
-	}	
-	
+
+	}
+
 	public int getScore() {
 		return this.score;
 	}
