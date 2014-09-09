@@ -35,6 +35,8 @@ public class Player {
 	}
 
 	public void update() {
+		this.child.update();
+
 		this.x = mouseX;
 		this.y = height - 100;
 
@@ -48,7 +50,6 @@ public class Player {
 		} else if (this.x > rightBarrier) {
 			this.render(rightBarrier, this.y);
 		}
-
 	}
 
 	public int getScore() {
