@@ -1,14 +1,12 @@
-/*
-Nate Mara
- 2013-10-12
- 
- "Space Invaders"
- 
- This program A *very* barebones version of the game "Space Invaders" . 
- I currently have not implimented any actual game mechanics, like score 
- or shot collisions with enemies, but it's a WIP.
- 
- */
+/**
+   @author Nate Mara
+   @author Evan Baker
+   @author Daltin Loomis
+
+   @date 2013-10-12
+
+   The game "Space Invaders" implemented in Processing.
+*/
 
 // Triggers a user can change
 int textStartY = 720/2;
