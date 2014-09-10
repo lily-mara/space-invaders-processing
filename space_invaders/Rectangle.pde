@@ -5,7 +5,7 @@ public class Rectangle {
 	private int height;
 	private boolean alive;
 
-	public rectanlge(int x, int y, int width, int height){
+	public Rectanlge(int x, int y, int width, int height){
 		this.posX = x;
 		this.posY = y;
 		this.width = width;
