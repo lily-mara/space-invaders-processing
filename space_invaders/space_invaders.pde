@@ -35,6 +35,7 @@ void setup() {
 	roofs = new Roof[4];
 	for (int i = 0; i < roofs.length; i++) {
 		roofs[i] = new Roof(50 + i*150, 525);
+		player.addRectangles(roofs[i].getRectangles());
 	}
 }
 
