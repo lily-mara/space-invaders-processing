@@ -10,11 +10,11 @@ public class Rectangle {
 		this.posY = y;
 		this.width = width;
 		this.height = height;
-		this.isAlive(true);
+		this.alive = true;
 	}
 
 	public void render() {
-		if(this.isAlive()) {
+		if(this.alive) {
 			rect(this.x, this.y, this.width, this.height);
 		}
 	}
@@ -35,7 +35,11 @@ public class Rectangle {
 		return this.height;
 	}
 
-	public boolean isAlive(boolean bool) {
-		this.alive= bool;
+	public void kill() {
+		this.alive = false;
+	}
+
+	public boolean isAlive() {
+		return this.alive;
 	}
 }
