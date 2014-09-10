@@ -6,7 +6,7 @@ public class Roof {
 	private int posY;
 	private Rectangle[] rectangles;
 
-	public roof(int x, int y) {
+	public Roof(int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		this.rectangles = new Rectangle[numPixels];
