@@ -18,53 +18,53 @@ public class Roof {
 
 		//First Row
 		for(int i = 0; i < 10; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (3 * pixelSize)), y, pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (3 * pixelSize)), posY, pixelSize, pixelSize);
 		}
 
 		//Second Row
-		for(int i = 0; i < (3 * pixelSize); i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (2 * pixelSize)), y + pixelSize, pixelSize, pixelSize);
+		for(int i = 0; i < (3 * piposXelSize); i++) {
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (2 * pixelSize)), posY + pixelSize, pixelSize, pixelSize);
 		}
 
 		//Third Row
-		for(int i = 0; i < (3 * pixelSize); i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + pixelSize), y + (2 * pixelSize), pixelSize, pixelSize);
+		for(int i = 0; i < (3 * piposXelSize); i++) {
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + pixelSize), posY + (2 * pixelSize), pixelSize, pixelSize);
 		}
 
 		// big ol middle chunk
 		for(int i = 0; i < 6; i++) {
 			for(int k = 0; k < 16; k++){
-				this.rectangles[i] = new Rectangle(x + (i * pixelSize), y + (i * pixelSize + (3 * pixelSize)), pixelSize, pixelSize);
+				this.rectangles[i] = new Rectangle(posX + (i * pixelSize), posY + (i * pixelSize + (3 * pixelSize)), pixelSize, pixelSize);
 			}
 		}
 
 		//Bottom Bitch part that's stuuuuupid
 		//Left bottom bitch
 		for(int i = 0; i < 6; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize), y + (9 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize), posY + (9 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 5; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize), y + (10 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize), posY + (10 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 4; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize), y + (11 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize), posY + (11 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 4; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize), y + (12 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize), posY + (12 * pixelSize), pixelSize, pixelSize);
 		}
 
 		//Right bottom bitch
 		for(int i = 0; i < 6; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (10 * pixelSize)), y + (9 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (10 * pixelSize)), posY + (9 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 5; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (11 * pixelSize)), y + (10 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (11 * pixelSize)), posY + (10 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 4; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (12 * pixelSize)), y + (11 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (12 * pixelSize)), posY + (11 * pixelSize), pixelSize, pixelSize);
 		}
 		for(int i = 0; i < 4; i++) {
-			this.rectangles[i] = new Rectangle(x + (i * pixelSize + (12 * pixelSize)), y + (12 * pixelSize), pixelSize, pixelSize);
+			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (12 * pixelSize)), posY + (12 * pixelSize), pixelSize, pixelSize);
 		}
 	}
 
