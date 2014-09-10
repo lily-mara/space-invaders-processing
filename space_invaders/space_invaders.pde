@@ -9,8 +9,8 @@
 */
 
 // Triggers a user can change
-int sStartY = 100;
-int sStartX = 75;
+final int BLOCK_START_Y = 100;
+final int BLOCK_START_X = 75;
 
 // Loads outside resources (image and font)
 PFont pixelFont;
@@ -31,7 +31,7 @@ void setup() {
 
 	FormatText();
 	noStroke();
-	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
+	invaders = new InvaderBlock(11, 5, BLOCK_START_X, BLOCK_START_Y);
 	player = new Player();
 
 	player.addInvaders(invaders.getInvaders());
