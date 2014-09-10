@@ -24,13 +24,13 @@ public class Roof {
 		}
 
 		//Second Row
-		for(int i = 0; i < (3 * PIXEL_SIZE); i++) {
+		for(int i = 0; i < 11; i++) {
 			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (2 * PIXEL_SIZE)), posY + PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
 			index++;
 		}
 
 		//Third Row
-		for(int i = 0; i < (3 * PIXEL_SIZE); i++) {
+		for(int i = 0; i < 12; i++) {
 			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + PIXEL_SIZE), posY + (2 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
 			index++;
 		}
