@@ -38,7 +38,7 @@ public class Roof {
 		// big ol middle chunk
 		for(int i = 0; i < 6; i++) {
 			for(int k = 0; k < 16; k++){
-				this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE), posY + (i * PIXEL_SIZE + (3 * PIXEL_SIZE)), PIXEL_SIZE, PIXEL_SIZE);
+				this.rectangles[index] = new Rectangle(posX + (k * PIXEL_SIZE), posY + (i * PIXEL_SIZE + (3 * PIXEL_SIZE)), PIXEL_SIZE, PIXEL_SIZE);
 				index++;
 			}
 		}
