@@ -52,7 +52,7 @@ void setup() {
 	player.addInvaders(invaders.getInvaders());
 
 	roofs = new Roof[4];
-	for (int i = 0; i < roofs; i++) {
+	for (int i = 0; i < roofs.length; i++) {
 		roofs[i] = new Roof(50 + i*150, 525);
 	}
 }
@@ -62,7 +62,6 @@ void draw() {
 		background(0);
 		ShotChecker();
 		RenderGUI();
-		DrawRoofs();
 		invaders.render();
 		invaders.update();
 		player.update();
