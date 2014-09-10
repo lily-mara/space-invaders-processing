@@ -102,6 +102,22 @@ public class Bullet {
 	}
 
 	/**
+	   Returns true if this bullet collides with the given Rectangle,
+	   false otherwise
+
+	   @param check the Rectangle to check if this collides
+	   @return true if this bullet collides with the given Rectangle
+	 */
+	private boolean collidesWith(Rectangle check) {
+		boolean inLeft = this.x >= check.getX();
+		boolean inRight = this.x <= check.getX() + check.getWidth();
+		boolean inTop = this.y >= check.getY();
+		boolean inBottom = this.y <= check.getY() + check.getHeight();
+
+		return inLeft && inRight && inTop && inBottom;
+	}
+
+	/**
 	   Returns true if this bullet collides with the given Invader,
 	   false otherwise
 
