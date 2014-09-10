@@ -9,8 +9,8 @@
 */
 
 // Triggers a user can change
-final int INVADER_BLOCK_START_Y = 100;
 final int INVADER_BLOCK_START_X = 75;
+final int INVADER_BLOCK_START_Y = 100;
 
 // Loads outside resources (image and font)
 PFont pixelFont;
