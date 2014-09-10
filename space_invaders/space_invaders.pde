@@ -25,7 +25,6 @@ void setup() {
 	textSize(30);
 
 	pixelFont = loadFont("Courier.vlw");
-	roof = loadImage("roof.png");
 
 	FormatText();
 	noStroke();
