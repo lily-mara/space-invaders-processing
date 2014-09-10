@@ -8,19 +8,17 @@
    The game "Space Invaders" implemented in Processing.
 */
 
-// Triggers a user can change
+// Constants
 final int INVADER_BLOCK_START_X = 75;
 final int INVADER_BLOCK_START_Y = 100;
 
-// Loads outside resources (image and font)
-PFont pixelFont;
-
-// Array that stores Invaders
+// Variables that store game logic
 InvaderBlock invaders;
 Player player;
 Roof[] roofs;
-
 boolean gameOver = false;
+
+PFont pixelFont;
 
 void setup() {
 	size(651, 744);
