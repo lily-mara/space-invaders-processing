@@ -142,21 +142,3 @@ void RenderGUI() {
 	textFont(pixelFont, 20);
 	text("SCORE: " + score, 50, 20);
 }
-
-void DrawRoof(int posX, int posY) {
-	/*
-	Draws the "roofs" (not really sure what to call them) at the "posX"
-	 and "posY" coordinates
-	 */
-	image(roof, posX, posY, 88, 64);
-}
-
-void DrawRoofs() {
-	/*
-	Draws all 4 of the roofs
-	 */
-	DrawRoof(50, 525);
-	DrawRoof(200, 525);
-	DrawRoof(350, 525);
-	DrawRoof(500, 525);
-}
