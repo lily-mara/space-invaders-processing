@@ -1,5 +1,5 @@
 public class Roof {
-	private static final int NUM_PIXELS = 168;
+	private static final int NUM_PIXELS = 170;
 	private static final int PIXEL_SIZE = 4;
 
 	private int posX;
