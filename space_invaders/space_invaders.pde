@@ -34,6 +34,7 @@ PImage roof;
 // Array that stores Invaders
 InvaderBlock invaders;
 Player player;
+Roof[] roofs;
 
 boolean gameOver = false;
 
@@ -49,6 +50,11 @@ void setup() {
 	player = new Player();
 
 	player.addInvaders(invaders.getInvaders());
+
+	roofs = new Roof[4];
+	for (int i = 0; i < roofs; i++) {
+		roofs[i] = new Roof(50 + i*150, 525);
+	}
 }
 
 void draw() {
@@ -60,6 +66,10 @@ void draw() {
 		invaders.render();
 		invaders.update();
 		player.update();
+
+		for (Roof r : roofs) {
+			r.render();
+		}
 
 		if (invaders.belowHeight(500)) {
 		  gameOver = true;
