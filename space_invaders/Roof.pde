@@ -88,6 +88,6 @@ public class Roof {
 	}
 
 	public rect[] getRectangles() {
-		return this.rectangles[];
+		return this.rectangles;
 	}
 }
