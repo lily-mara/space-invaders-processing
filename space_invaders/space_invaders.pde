@@ -27,7 +27,7 @@ void setup() {
 	pixelFont = loadFont("Courier.vlw");
 
 	noStroke();
-	invaders = new InvaderBlock(11, 5, INVADER_BLOCK_START_X, BLOCK_START_Y);
+	invaders = new InvaderBlock(11, 5, INVADER_BLOCK_START_X, INVADER_BLOCK_START_Y);
 	player = new Player();
 
 	player.addInvaders(invaders.getInvaders());
