@@ -58,6 +58,12 @@ public class Player {
 		}
 	}
 
+	public void addRectangles(Rectangle[] rectangles) {
+		for (Rectangle i : rectangles) {
+			this.child.addRectangle(i);
+		}
+	}
+
 	public int getScore() {
 		return this.score;
 	}

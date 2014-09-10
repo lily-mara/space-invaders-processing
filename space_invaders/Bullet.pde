@@ -8,6 +8,7 @@ public class Bullet {
 	private int x;
 	private int y;
 	private ArrayList<Invader> invaders;
+	private ArrayList<Rectangle> rectangles;
 
 	/**
 	   Construct a new Bullet object with the given Player object as
@@ -22,6 +23,7 @@ public class Bullet {
 		this.parent = parent;
 		this.alive = false;
 		this.invaders = new ArrayList<Invader>();
+		this.rectangles = new ArrayList<Rectangle>();
 	}
 
 	public void update() {
@@ -60,6 +62,16 @@ public class Bullet {
 	}
 
 	/**
+	   Add the given Rectangle to the ArrayList of Rectangles that this
+	   stores for collision detection
+
+	   @param toAdd the Rectangle to add
+	 */
+	public void addRectangle(Rectangle toAdd) {
+		this.rectangles.add(toAdd);
+	}
+
+	/**
 	   Check the current position of this and compare it to the
 	   position of all of the Invaders to detect a collision.
 
@@ -70,13 +82,42 @@ public class Bullet {
 		for (int i = 0; i < this.invaders.size(); i++) {
 			Invader current = this.invaders.get(i);
 			if (current.isAlive()) {
-				if (this.collidesWith(current)) {
+				if (this.collidesWithInvader(current)) {
 					current.kill();
 					this.alive = false;
 					this.parent.addToScore(50);
 				}
 			}
 		}
+
+		for (int i = 0; i < this.rectangles.size(); i++) {
+			Rectangle current = this.rectangles.get(i);
+			if (current.isAlive()) {
+				if(this.collidesWithRect(current)) {
+					current.kill();
+					this.alive = false;
+				}
+			}
+		}
+	}
+
+	/**
+	   Returns true if this bullet collides with the given Rectangle,
+	   false otherwise
+
+	   @param check the Rectangle to check if this collides
+	   @return true if this bullet collides with the given Rectangle
+	 */
+	private boolean collidesWithRect(Rectangle check) {
+		int toleranceX = 8;
+		int toleranceY = 15;
+
+		boolean inLeft = this.x >= check.getX() - toleranceX;
+		boolean inRight = this.x <= check.getX() + check.getWidth() + toleranceX;
+		boolean inTop = this.y >= check.getY() - toleranceY;
+		boolean inBottom = this.y <= check.getY() + check.getHeight() + toleranceY;
+
+		return inLeft && inRight && inTop && inBottom;
 	}
 
 	/**
@@ -86,7 +127,7 @@ public class Bullet {
 	   @param check the Invader to check if this collides
 	   @return true if this bullet collides with the given Invader
 	 */
-	private boolean collidesWith(Invader check) {
+	private boolean collidesWithInvader(Invader check) {
 		int tolerance = 3;
 
 		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
