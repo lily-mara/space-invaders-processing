@@ -79,7 +79,6 @@ public class Roof {
 			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (12 * PIXEL_SIZE)), posY + (12 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
 			index++;
 		}
-		println(index);
 	}
 
 	public void render() {
