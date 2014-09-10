@@ -8,6 +8,7 @@ public class Bullet {
 	private int x;
 	private int y;
 	private ArrayList<Invader> invaders;
+	private ArrayList<Rectangle> rectangles;
 
 	/**
 	   Construct a new Bullet object with the given Player object as
@@ -22,6 +23,7 @@ public class Bullet {
 		this.parent = parent;
 		this.alive = false;
 		this.invaders = new ArrayList<Invader>();
+		this.rectangles = new ArrayList<Rectangle>();
 	}
 
 	public void update() {
@@ -57,6 +59,16 @@ public class Bullet {
 	 */
 	public void addInvader(Invader toAdd) {
 		this.invaders.add(toAdd);
+	}
+
+	/**
+	   Add the given Rectangle to the ArrayList of Rectangles that this
+	   stores for collision detection
+
+	   @param toAdd the Rectangle to add
+	 */
+	public void addRectangle(Rectangle toAdd) {
+		this.rectangles.add(toAdd);
 	}
 
 	/**
