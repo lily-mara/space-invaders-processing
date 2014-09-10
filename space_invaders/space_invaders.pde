@@ -79,18 +79,17 @@ void draw() {
 	}
 }
 
+/**
+   Every time the mouse is pressed, shoot a laser beam
+ */
 void mousePressed() {
-	/*
-	If a laser shot doesn't exist, creates one
-	 */
 	player.shoot();
 }
 
+/**
+   Draw the score in top-left corner of screen
+ */
 void renderGUI() {
-	/*
-	Creates the SCORE in the top left of the screen (even though it
-	 can't be changed...)
-	 */
 	fill(255);
 	textFont(pixelFont, 20);
 	text("SCORE: " + player.getScore(), 50, 20);
