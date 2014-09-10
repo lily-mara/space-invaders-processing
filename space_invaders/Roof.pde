@@ -74,11 +74,6 @@ public class Roof {
 		}
 	}
 
-	//Send the position of the hit block for deletion?
-	public void hit(rect rectangle) {
-
-	}
-
 	public int getX() {
 		return this.posX;
 	}
