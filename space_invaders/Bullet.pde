@@ -82,7 +82,7 @@ public class Bullet {
 		for (int i = 0; i < this.invaders.size(); i++) {
 			Invader current = this.invaders.get(i);
 			if (current.isAlive()) {
-				if (this.collidesWith(current)) {
+				if (this.collidesWithInvader(current)) {
 					current.kill();
 					this.alive = false;
 					this.parent.addToScore(50);
@@ -93,7 +93,7 @@ public class Bullet {
 		for (int i = 0; i < this.rectangles.size(); i++) {
 			Rectangle current = this.rectangles.get(i);
 			if (current.isAlive()) {
-				if(this.collidesWith(current)) {
+				if(this.collidesWithRect(current)) {
 					current.kill();
 					this.alive = false;
 				}
@@ -108,7 +108,7 @@ public class Bullet {
 	   @param check the Rectangle to check if this collides
 	   @return true if this bullet collides with the given Rectangle
 	 */
-	private boolean collidesWith(Rectangle check) {
+	private boolean collidesWithRect(Rectangle check) {
 		boolean inLeft = this.x >= check.getX();
 		boolean inRight = this.x <= check.getX() + check.getWidth();
 		boolean inTop = this.y >= check.getY();
@@ -124,7 +124,7 @@ public class Bullet {
 	   @param check the Invader to check if this collides
 	   @return true if this bullet collides with the given Invader
 	 */
-	private boolean collidesWith(Invader check) {
+	private boolean collidesWithInvader(Invader check) {
 		int tolerance = 3;
 
 		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
