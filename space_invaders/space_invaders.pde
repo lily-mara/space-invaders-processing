@@ -60,7 +60,6 @@ void setup() {
 void draw() {
 	if (!gameOver) {
 		background(0);
-		ShotChecker();
 		RenderGUI();
 		invaders.render();
 		invaders.update();
@@ -75,17 +74,8 @@ void draw() {
 		}
 	} else {
 		fill(#FF6600);
-		TextLine("GAME OVER", 5);
+		text("GAME OVER", width/2, height/2);
 	}
-}
-
-void TextLine(String inputText, int inputLine) {
-	/*
-	Prints "inputText" at the "inputLine" line. (line is an arbitrary
-	 Y coordinate based on the "textStartY" and "textLineSpacing" variables)
-	 */
-	int textLine = textStartY + (inputLine - 1) * textLineSpacing;
-	text(inputText, width/2, textLine);
 }
 
 void FormatText() {
@@ -95,41 +85,11 @@ void FormatText() {
 	textSize(30);
 }
 
-void Shoot(int posX) {
-	/*
-	creates laser shot at the "posX" parameter
-	 */
-	fill(255);
-	rect(posX, shotY, 5, 20);
-}
-
 void mousePressed() {
 	/*
 	If a laser shot doesn't exist, creates one
 	 */
 	player.shoot();
-}
-
-void ShotChecker() {
-	/*
-	Runs in background, controls various aspects of the laser shot.
-	 */
-	boolean collidesWithRoof1 = 45<shotX && shotX<145;
-	boolean collidesWithRoof2 = 195<shotX && shotX<295;
-	boolean collidesWithRoof3 = 345<shotX && shotX<445;
-	boolean collidesWithRoof4 = 495<shotX && shotX<595;
-
-	boolean collidesWithRoofs = collidesWithRoof1 || 
-		collidesWithRoof2 || collidesWithRoof3 || collidesWithRoof4;
-
-
-	if (shotExists) {
-		Shoot(shotX);
-		shotY -= shotSpeed;
-	}
-	if (shotY < 0 || (collidesWithRoofs) && shotY < 550) {
-		shotExists = false;
-	}
 }
 
 void RenderGUI() {
