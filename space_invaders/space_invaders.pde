@@ -92,7 +92,6 @@ void FormatText() {
 	/*
 	Adds formatting to text
 	 */
-	textAlign(CENTER);
 	textSize(30);
 }
 
@@ -140,5 +139,5 @@ void RenderGUI() {
 	 */
 	fill(255);
 	textFont(pixelFont, 20);
-	text("SCORE: " + score, 50, 20);
+	text("SCORE: " + player.getScore(), 50, 20);
 }
