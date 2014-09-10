@@ -82,7 +82,7 @@ public class Roof {
 		return this.posY;	
 	}
 
-	public rect[] getRectangles() {
+	public Rectangle[] getRectangles() {
 		return this.rectangles;
 	}
 }
