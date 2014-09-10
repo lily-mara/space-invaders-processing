@@ -89,6 +89,16 @@ public class Bullet {
 				}
 			}
 		}
+
+		for (int i = 0; i < this.rectangles.size(); i++) {
+			Rectangle current = this.rectangles.get(i);
+			if (current.isAlive()) {
+				if(this.collidesWith(current)) {
+					current.kill();
+					this.alive = false;
+				}
+			}
+		}
 	}
 
 	/**
