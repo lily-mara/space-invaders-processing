@@ -92,7 +92,7 @@ public class Roof {
 	}
 
 	public int getY() {
-		return this.posY;	
+		return this.posY;
 	}
 
 	public Rectangle[] getRectangles() {
