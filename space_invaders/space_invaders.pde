@@ -40,6 +40,7 @@ boolean gameOver = false;
 
 void setup() {
 	size(651, 744);
+	textSize(30);
 
 	pixelFont = loadFont("Courier.vlw");
 	roof = loadImage("roof.png");
@@ -60,7 +61,7 @@ void setup() {
 void draw() {
 	if (!gameOver) {
 		background(0);
-		RenderGUI();
+		renderGUI();
 		invaders.render();
 		invaders.update();
 		player.update();
@@ -78,13 +79,6 @@ void draw() {
 	}
 }
 
-void FormatText() {
-	/*
-	Adds formatting to text
-	 */
-	textSize(30);
-}
-
 void mousePressed() {
 	/*
 	If a laser shot doesn't exist, creates one
@@ -92,7 +86,7 @@ void mousePressed() {
 	player.shoot();
 }
 
-void RenderGUI() {
+void renderGUI() {
 	/*
 	Creates the SCORE in the top left of the screen (even though it
 	 can't be changed...)
