@@ -9,23 +9,11 @@
 */
 
 // Triggers a user can change
-int textStartY = 720/2;
-final int textLineSpacing = 30;
-final int shotSpeed = 9;
 int sStartY = 100;
 int sStartX = 75;
 
-// Variables that the program uses
-boolean shotExists = false;
-int shotX;
-int score = 0;
-int playerPosX;
-int playerPosY;
-int shotY;
-
 // Loads outside resources (image and font)
 PFont pixelFont;
-PImage roof;
 
 // Array that stores Invaders
 InvaderBlock invaders;
