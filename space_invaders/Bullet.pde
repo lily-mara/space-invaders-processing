@@ -109,12 +109,13 @@ public class Bullet {
 	   @return true if this bullet collides with the given Rectangle
 	 */
 	private boolean collidesWithRect(Rectangle check) {
-		int tolerance = 3;
+		int toleranceX = 8;
+		int toleranceY = 15;
 
-		boolean inLeft = this.x >= check.getX() - tolerance;
-		boolean inRight = this.x <= check.getX() + check.getWidth() + tolerance;
-		boolean inTop = this.y >= check.getY() - tolerance;
-		boolean inBottom = this.y <= check.getY() + check.getHeight() + tolerance;
+		boolean inLeft = this.x >= check.getX() - toleranceX;
+		boolean inRight = this.x <= check.getX() + check.getWidth() + toleranceX;
+		boolean inTop = this.y >= check.getY() - toleranceY;
+		boolean inBottom = this.y <= check.getY() + check.getHeight() + toleranceY;
 
 		return inLeft && inRight && inTop && inBottom;
 	}
