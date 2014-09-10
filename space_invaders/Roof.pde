@@ -1,10 +1,10 @@
 public class Roof {
+	private static final int numPixels = 171;
+	private static final int pixelSize = 4;
 
 	private int posX;
 	private int posY;
 	private Rectangle[] rectangles;
-	private static final numPixels = 171;
-	private static final pixelSize = 4;
 
 	public roof(int x, int y) {
 		this.posX = x;
