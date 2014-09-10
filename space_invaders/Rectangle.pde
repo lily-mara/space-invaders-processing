@@ -15,7 +15,7 @@ public class Rectangle {
 
 	public void render() {
 		if(this.alive) {
-			rect(this.x, this.y, this.width, this.height);
+			rect(this.posX, this.posY, this.width, this.height);
 		}
 	}
 
