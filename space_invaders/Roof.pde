@@ -22,12 +22,12 @@ public class Roof {
 		}
 
 		//Second Row
-		for(int i = 0; i < (3 * piposXelSize); i++) {
+		for(int i = 0; i < (3 * pixelSize); i++) {
 			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + (2 * pixelSize)), posY + pixelSize, pixelSize, pixelSize);
 		}
 
 		//Third Row
-		for(int i = 0; i < (3 * piposXelSize); i++) {
+		for(int i = 0; i < (3 * pixelSize); i++) {
 			this.rectangles[i] = new Rectangle(posX + (i * pixelSize + pixelSize), posY + (2 * pixelSize), pixelSize, pixelSize);
 		}
 
