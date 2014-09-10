@@ -1,156 +1,3 @@
-/* @pjs preload="roof.png"; */
-
-/*
-Nate Mara
- 2013-10-12
- 
- "Space Invaders"
- 
- This program A *very* barebones version of the game "Space Invaders" . 
- I currently have not implimented any actual game mechanics, like score 
- or shot collisions with enemies, but it's a WIP.
- 
- */
-
-// Triggers a user can change
-int textStartY = 720/2;
-final int textLineSpacing = 30;
-final int shotSpeed = 9;
-int sStartY = 100;
-int sStartX = 75;
-
-// Variables that the program uses
-boolean shotExists = false;
-int shotX;
-int score = 0;
-int playerPosX;
-int playerPosY;
-int shotY;
-
-// Loads outside resources (image and font)
-PFont pixelFont;
-PImage roof;
-
-// Array that stores Invaders
-InvaderBlock invaders;
-Player player;
-
-boolean gameOver = false;
-
-void setup() {
-	size(651, 744);
-
-	pixelFont = loadFont("Courier.vlw");
-	roof = loadImage("roof.png");
-
-	FormatText();
-	noStroke();
-	invaders = new InvaderBlock(11, 5, sStartX, sStartY);
-	player = new Player();
-
-	player.addInvaders(invaders.getInvaders());
-}
-
-void draw() {
-	if (!gameOver) {
-		background(0);
-		ShotChecker();
-		RenderGUI();
-		DrawRoofs();
-		invaders.render();
-		invaders.update();
-		player.update();
-
-		if (invaders.belowHeight(500)) {
-		  gameOver = true;
-		}
-	} else {
-		fill(#FF6600);
-		TextLine("GAME OVER", 5);
-	}
-}
-
-void TextLine(String inputText, int inputLine) {
-	/*
-	Prints "inputText" at the "inputLine" line. (line is an arbitrary
-	 Y coordinate based on the "textStartY" and "textLineSpacing" variables)
-	 */
-	int textLine = textStartY + (inputLine - 1) * textLineSpacing;
-	text(inputText, width/2, textLine);
-}
-
-void FormatText() {
-	/*
-	Adds formatting to text
-	 */
-	textAlign(CENTER);
-	textSize(30);
-}
-
-void Shoot(int posX) {
-	/*
-	creates laser shot at the "posX" parameter
-	 */
-	fill(255);
-	rect(posX, shotY, 5, 20);
-}
-
-void mousePressed() {
-	/*
-	If a laser shot doesn't exist, creates one
-	 */
-	player.shoot();
-}
-
-void ShotChecker() {
-	/*
-	Runs in background, controls various aspects of the laser shot.
-	 */
-	boolean collidesWithRoof1 = 45<shotX && shotX<145;
-	boolean collidesWithRoof2 = 195<shotX && shotX<295;
-	boolean collidesWithRoof3 = 345<shotX && shotX<445;
-	boolean collidesWithRoof4 = 495<shotX && shotX<595;
-
-	boolean collidesWithRoofs = collidesWithRoof1 || 
-		collidesWithRoof2 || collidesWithRoof3 || collidesWithRoof4;
-
-
-	if (shotExists) {
-		Shoot(shotX);
-		shotY -= shotSpeed;
-	}
-	if (shotY < 0 || (collidesWithRoofs) && shotY < 550) {
-		shotExists = false;
-	}
-}
-
-void RenderGUI() {
-	/*
-	Creates the SCORE in the top left of the screen (even though it
-	 can't be changed...)
-	 */
-	fill(255);
-	textFont(pixelFont, 20);
-	text("SCORE: " + score, 50, 20);
-}
-
-void DrawRoof(int posX, int posY) {
-	/*
-	Draws the "roofs" (not really sure what to call them) at the "posX"
-	 and "posY" coordinates
-	 */
-	image(roof, posX, posY, 88, 64);
-}
-
-void DrawRoofs() {
-	/*
-	Draws all 4 of the roofs
-	 */
-	DrawRoof(50, 525);
-	DrawRoof(200, 525);
-	DrawRoof(350, 525);
-	DrawRoof(500, 525);
-}
 import java.util.ArrayList;
 
 public class Bullet {
@@ -161,6 +8,7 @@ public class Bullet {
 	private int x;
 	private int y;
 	private ArrayList<Invader> invaders;
+	private ArrayList<Rectangle> rectangles;
 
 	/**
 	   Construct a new Bullet object with the given Player object as
@@ -175,6 +23,7 @@ public class Bullet {
 		this.parent = parent;
 		this.alive = false;
 		this.invaders = new ArrayList<Invader>();
+		this.rectangles = new ArrayList<Rectangle>();
 	}
 
 	public void update() {
@@ -213,6 +62,16 @@ public class Bullet {
 	}
 
 	/**
+	   Add the given Rectangle to the ArrayList of Rectangles that this
+	   stores for collision detection
+
+	   @param toAdd the Rectangle to add
+	 */
+	public void addRectangle(Rectangle toAdd) {
+		this.rectangles.add(toAdd);
+	}
+
+	/**
 	   Check the current position of this and compare it to the
 	   position of all of the Invaders to detect a collision.
 
@@ -223,13 +82,42 @@ public class Bullet {
 		for (int i = 0; i < this.invaders.size(); i++) {
 			Invader current = this.invaders.get(i);
 			if (current.isAlive()) {
-				if (this.collidesWith(current)) {
+				if (this.collidesWithInvader(current)) {
 					current.kill();
 					this.alive = false;
 					this.parent.addToScore(50);
 				}
 			}
 		}
+
+		for (int i = 0; i < this.rectangles.size(); i++) {
+			Rectangle current = this.rectangles.get(i);
+			if (current.isAlive()) {
+				if(this.collidesWithRect(current)) {
+					current.kill();
+					this.alive = false;
+				}
+			}
+		}
+	}
+
+	/**
+	   Returns true if this bullet collides with the given Rectangle,
+	   false otherwise
+
+	   @param check the Rectangle to check if this collides
+	   @return true if this bullet collides with the given Rectangle
+	 */
+	private boolean collidesWithRect(Rectangle check) {
+		int toleranceX = 8;
+		int toleranceY = 15;
+
+		boolean inLeft = this.x >= check.getX() - toleranceX;
+		boolean inRight = this.x <= check.getX() + check.getWidth() + toleranceX;
+		boolean inTop = this.y >= check.getY() - toleranceY;
+		boolean inBottom = this.y <= check.getY() + check.getHeight() + toleranceY;
+
+		return inLeft && inRight && inTop && inBottom;
 	}
 
 	/**
@@ -239,7 +127,7 @@ public class Bullet {
 	   @param check the Invader to check if this collides
 	   @return true if this bullet collides with the given Invader
 	 */
-	private boolean collidesWith(Invader check) {
+	private boolean collidesWithInvader(Invader check) {
 		int tolerance = 3;
 
 		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
@@ -257,93 +145,6 @@ public class Bullet {
 	public boolean isAlive() {
 		return this.alive;
 	}
-}
-public class Invader {
-	private final int MOVE_FACTOR = 3;
-	private final int LEVEL = 10;
-
-	private int posX;
-	private int posY;
-	private boolean alive = true;
-	private boolean moveRight = true;
-
-	/**
-	   A single "space invader" object
-	   @param posX the the left bound of this invader
-	   @param posY the right bound of this invader
-	 */
-	public Invader(int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
-	}
-
-	/**
-	   Draw this space invader
-	 */
-	public void render() {
-		if (this.alive) {
-			rect(this.posX, this.posY + 5, 28, 8);
-			rect(this.posX, this.posY, 12, 16);
-			rect(this.posX - 12, this.posY + 10, 4, 4);
-			rect(this.posX + 12, this.posY + 10, 4, 4);
-			rect(this.posX - 6, this.posY + 14, 8, 4);
-			rect(this.posX + 6, this.posY + 14, 8, 4);
-			rect(this.posX - 8, this.posY - 10, 4, 4);
-			rect(this.posX + 8, this.posY - 10, 4, 4);
-			rect(this.posX - 12, this.posY - 14, 4, 4);
-			rect(this.posX + 12, this.posY - 14, 4, 4);
-			rect(this.posX - 10, this.posY - 6, 8, 4);
-			rect(this.posX + 10, this.posY - 6, 8, 4);
-			rect(this.posX - 12, this.posY - 1, 4, 6);
-			rect(this.posX + 12, this.posY - 1, 4, 6);
-			rect(this.posX - 16, this.posY - 0, 4, 8);
-			rect(this.posX + 16, this.posY - 0, 4, 8);
-			rect(this.posX - 20, this.posY + 6, 4, 12);
-			rect(this.posX + 20, this.posY + 6, 4, 12);
-		}
-	}
-
-	/**
-	   sets the life status to false
-	 */
-	public void kill() {
-		this.alive = false;
-	}
-
-	/**
-	   Reverse the direction of this space invader
-	 */
-	public void flip() {
-		this.moveRight = !this.moveRight;
-	}
-
-	/**
-	   Update the location of this space invader
-	 */
-	public void update() {
-		if (this.moveRight) {
-			this.posX += MOVE_FACTOR;
-		} else {
-			this.posX -= MOVE_FACTOR;
-		}
-	}
-
-	public void downLevel() {
-		this.posY += LEVEL;
-	}
-
-	public boolean isAlive() {
-		return this.alive;
-	}
-
-	public int getX() {
-		return this.posX;
-	}
-
-	public int getY() {
-		return this.posY;
-	}
-
 }
 public class InvaderBlock {
 	private final int BORDER = 40;
@@ -529,6 +330,93 @@ public class InvaderBlock {
 		}
 	}
 }
+public class Invader {
+	private final int MOVE_FACTOR = 3;
+	private final int LEVEL = 10;
+
+	private int posX;
+	private int posY;
+	private boolean alive = true;
+	private boolean moveRight = true;
+
+	/**
+	   A single "space invader" object
+	   @param posX the the left bound of this invader
+	   @param posY the right bound of this invader
+	 */
+	public Invader(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+	}
+
+	/**
+	   Draw this space invader
+	 */
+	public void render() {
+		if (this.alive) {
+			rect(this.posX, this.posY + 5, 28, 8);
+			rect(this.posX, this.posY, 12, 16);
+			rect(this.posX - 12, this.posY + 10, 4, 4);
+			rect(this.posX + 12, this.posY + 10, 4, 4);
+			rect(this.posX - 6, this.posY + 14, 8, 4);
+			rect(this.posX + 6, this.posY + 14, 8, 4);
+			rect(this.posX - 8, this.posY - 10, 4, 4);
+			rect(this.posX + 8, this.posY - 10, 4, 4);
+			rect(this.posX - 12, this.posY - 14, 4, 4);
+			rect(this.posX + 12, this.posY - 14, 4, 4);
+			rect(this.posX - 10, this.posY - 6, 8, 4);
+			rect(this.posX + 10, this.posY - 6, 8, 4);
+			rect(this.posX - 12, this.posY - 1, 4, 6);
+			rect(this.posX + 12, this.posY - 1, 4, 6);
+			rect(this.posX - 16, this.posY - 0, 4, 8);
+			rect(this.posX + 16, this.posY - 0, 4, 8);
+			rect(this.posX - 20, this.posY + 6, 4, 12);
+			rect(this.posX + 20, this.posY + 6, 4, 12);
+		}
+	}
+
+	/**
+	   sets the life status to false
+	 */
+	public void kill() {
+		this.alive = false;
+	}
+
+	/**
+	   Reverse the direction of this space invader
+	 */
+	public void flip() {
+		this.moveRight = !this.moveRight;
+	}
+
+	/**
+	   Update the location of this space invader
+	 */
+	public void update() {
+		if (this.moveRight) {
+			this.posX += MOVE_FACTOR;
+		} else {
+			this.posX -= MOVE_FACTOR;
+		}
+	}
+
+	public void downLevel() {
+		this.posY += LEVEL;
+	}
+
+	public boolean isAlive() {
+		return this.alive;
+	}
+
+	public int getX() {
+		return this.posX;
+	}
+
+	public int getY() {
+		return this.posY;
+	}
+
+}
 public class Player {
 
 	private int x;
@@ -589,6 +477,12 @@ public class Player {
 		}
 	}
 
+	public void addRectangles(Rectangle[] rectangles) {
+		for (Rectangle i : rectangles) {
+			this.child.addRectangle(i);
+		}
+	}
+
 	public int getScore() {
 		return this.score;
 	}
@@ -612,5 +506,228 @@ public class Player {
 	public int getY() {
 		return this.y;
 	}
+}
+public class Rectangle {
+	private int posX;
+	private int posY;
+	private int width;
+	private int height;
+	private boolean alive;
+
+	public Rectangle (int x, int y, int width, int height){
+		this.posX = x;
+		this.posY = y;
+		this.width = width;
+		this.height = height;
+		this.alive = true;
+	}
+
+	public void render() {
+		if(this.alive) {
+			rect(this.posX, this.posY, this.width, this.height);
+		}
+	}
+
+	public int getX() {
+		return this.posX;
+	}
+
+	public int getY() {
+		return this.posY;
+	}
+
+	public int getWidth() {
+		return this.width;
+	}
+
+	public int getHeight() {
+		return this.height;
+	}
+
+	public void kill() {
+		this.alive = false;
+	}
+
+	public boolean isAlive() {
+		return this.alive;
+	}
+}
+public class Roof {
+	private static final int NUM_PIXELS = 170;
+	private static final int PIXEL_SIZE = 4;
+
+	private int posX;
+	private int posY;
+	private Rectangle[] rectangles;
+
+	public Roof(int x, int y) {
+		this.posX = x;
+		this.posY = y;
+		this.rectangles = new Rectangle[NUM_PIXELS];
+		this.setRectangles();
+	}
+
+	public void setRectangles() {
+		rectMode(CORNERS);
+		int index = 0;
+
+		//First Row
+		for(int i = 0; i < 10; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (3 * PIXEL_SIZE)), posY, PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+
+		//Second Row
+		for(int i = 0; i < 12; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (2 * PIXEL_SIZE)), posY + PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+
+		//Third Row
+		for(int i = 0; i < 14; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + PIXEL_SIZE), posY + (2 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+
+		// big ol middle chunk
+		for(int i = 0; i < 6; i++) {
+			for(int k = 0; k < 16; k++){
+				this.rectangles[index] = new Rectangle(posX + (k * PIXEL_SIZE), posY + (i * PIXEL_SIZE + (3 * PIXEL_SIZE)), PIXEL_SIZE, PIXEL_SIZE);
+				index++;
+			}
+		}
+
+		//Bottom Bitch part that's stuuuuupid
+		//Left bottom bitch
+		for(int i = 0; i < 6; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE), posY + (9 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 5; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE), posY + (10 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 4; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE), posY + (11 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 4; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE), posY + (12 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+
+		//Right bottom bitch
+		for(int i = 0; i < 6; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (10 * PIXEL_SIZE)), posY + (9 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 5; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (11 * PIXEL_SIZE)), posY + (10 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 4; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (12 * PIXEL_SIZE)), posY + (11 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+		for(int i = 0; i < 4; i++) {
+			this.rectangles[index] = new Rectangle(posX + (i * PIXEL_SIZE + (12 * PIXEL_SIZE)), posY + (12 * PIXEL_SIZE), PIXEL_SIZE, PIXEL_SIZE);
+			index++;
+		}
+	}
+
+	public void render() {
+		for(int i = 0; i < NUM_PIXELS; i++){
+			this.rectangles[i].render();
+		}
+	}
+
+	public int getX() {
+		return this.posX;
+	}
+
+	public int getY() {
+		return this.posY;
+	}
+
+	public Rectangle[] getRectangles() {
+		return this.rectangles;
+	}
+}
+/**
+   @author Nate Mara
+   @author Evan Baker
+   @author Daltin Loomis
+
+   @date 2013-10-12
+
+   The game "Space Invaders" implemented in Processing.
+*/
+
+// Constants
+final int INVADER_BLOCK_START_X = 75;
+final int INVADER_BLOCK_START_Y = 100;
+
+// Variables that store game logic
+InvaderBlock invaders;
+Player player;
+Roof[] roofs;
+boolean gameOver = false;
+
+PFont pixelFont;
+
+void setup() {
+	size(651, 744);
+	textSize(30);
+
+	pixelFont = loadFont("Courier.vlw");
+
+	noStroke();
+	invaders = new InvaderBlock(11, 5, INVADER_BLOCK_START_X, INVADER_BLOCK_START_Y);
+	player = new Player();
+
+	player.addInvaders(invaders.getInvaders());
+
+	roofs = new Roof[4];
+	for (int i = 0; i < roofs.length; i++) {
+		roofs[i] = new Roof(50 + i*150, 525);
+		player.addRectangles(roofs[i].getRectangles());
+	}
+}
+
+void draw() {
+	if (!gameOver) {
+		background(0);
+		renderGUI();
+		invaders.render();
+		invaders.update();
+		player.update();
+
+		for (Roof r : roofs) {
+			r.render();
+		}
+
+		if (invaders.belowHeight(500)) {
+		  gameOver = true;
+		}
+	} else {
+		fill(#FF6600);
+		text("GAME OVER", width/2, height/2);
+	}
+}
+
+/**
+   Every time the mouse is pressed, shoot a laser beam
+ */
+void mousePressed() {
+	player.shoot();
+}
+
+/**
+   Draw the score in top-left corner of screen
+ */
+void renderGUI() {
+	fill(255);
+	textFont(pixelFont, 20);
+	text("SCORE: " + player.getScore(), 50, 20);
 }
 
