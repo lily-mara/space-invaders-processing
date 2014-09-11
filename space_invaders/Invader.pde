@@ -4,6 +4,8 @@ public class Invader {
 
 	private int posX;
 	private int posY;
+	private int originX;
+	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
 
@@ -15,6 +17,8 @@ public class Invader {
 	public Invader(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
+		this.originX = posX;
+		this.originY = posY;
 	}
 
 	/**
@@ -41,6 +45,11 @@ public class Invader {
 			rect(this.posX - 20, this.posY + 6, 4, 12);
 			rect(this.posX + 20, this.posY + 6, 4, 12);
 		}
+	}
+
+	private void reset() {
+		this.posX = this.originX;
+		this.posY = this.originY;
 	}
 
 	/**
@@ -77,6 +86,7 @@ public class Invader {
 	}
 
 	public void resurrect() {
+		this.reset();
 		this.alive = true;
 	}
 
