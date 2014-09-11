@@ -39,7 +39,7 @@ void setup() {
 }
 
 void draw() {
-	if (player.getLives() > 0) {
+	if (true) {
 		background(0);
 		renderGUI();
 		invaders.render();
@@ -56,7 +56,11 @@ void draw() {
 		}
 	} else {
 		fill(#FF6600);
-		text("GAME OVER", width/2, height/2);
+		background(0);
+		textAlign(CENTER);
+		text("GAME OVER", width/2, height/2 - 30);
+		text("SCORE:", width/2, height/2 + 20);
+		text(player.getScore(), width/2, height/2 + 50);
 	}
 }
 
