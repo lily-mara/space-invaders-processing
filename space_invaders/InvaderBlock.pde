@@ -30,6 +30,10 @@ public class InvaderBlock {
 		this.lastUpdate = 0;
 		this.delay = 300;
 
+		this.createInvaders();
+	}
+
+	private void createInvaders() {
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
 				int x = this.startX + j * X_SPACING;
@@ -39,10 +43,14 @@ public class InvaderBlock {
 		}
 	}
 
-	public void reset() {
-		for (Invader[] i : this.block) {
-			for (Invader j : i) {
-				j.resurrect();
+	public void reset(boolean createNewInvaders) {
+		if (createNewInvaders) {
+			this.createInvaders();
+		} else {
+			for (Invader[] i : this.block) {
+				for (Invader j : i) {
+					j.resurrect();
+				}
 			}
 		}
 	}
@@ -80,7 +88,7 @@ public class InvaderBlock {
 			}
 
 			if (everyInvaderIsDead) {
-				this.reset();
+				this.reset(false);
 			}
 		}
 	}
