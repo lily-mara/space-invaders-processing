@@ -41,7 +41,7 @@ void setup() {
 }
 
 void draw() {
-	if (false) {
+	if (player.getLives() > 0) {
 		background(0);
 		renderGUI();
 		invaders.render();
