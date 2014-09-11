@@ -39,6 +39,14 @@ public class InvaderBlock {
 		}
 	}
 
+	public void reset() {
+		for (Invader[] i : this.block) {
+			for (Invader j : i) {
+				j.resurrect();
+			}
+		}
+	}
+
 	/**
 	   Draws every Invader object in this InvaderBlock
 	 */
@@ -72,11 +80,7 @@ public class InvaderBlock {
 			}
 
 			if (everyInvaderIsDead) {
-				for (Invader[] i : this.block) {
-					for (Invader j : i) {
-						j.resurrect();
-					}
-				}
+				this.reset();
 			}
 		}
 	}
