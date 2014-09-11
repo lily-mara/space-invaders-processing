@@ -91,4 +91,8 @@ public class Player {
 	public int getY() {
 		return this.y;
 	}
+
+	public void kill() {
+		this.lives--;
+	}
 }
