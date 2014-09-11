@@ -76,6 +76,10 @@ public class Invader {
 		return this.alive;
 	}
 
+	public void resurrect() {
+		this.alive = true;
+	}
+
 	public int getX() {
 		return this.posX;
 	}
