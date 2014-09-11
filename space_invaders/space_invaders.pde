@@ -52,7 +52,7 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-		  gameOver = true;
+			gameOver = true;
 		}
 	} else {
 		fill(#FF6600);
