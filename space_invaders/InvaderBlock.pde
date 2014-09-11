@@ -2,6 +2,7 @@ public class InvaderBlock {
 	private final int BORDER = 40;
 	private final int X_SPACING = 50;
 	private final int Y_SPACING = 60;
+	private final int STARTING_DELAY = 300;
 
 	private Invader[][] block;
 	private int blockWidth;
@@ -28,7 +29,7 @@ public class InvaderBlock {
 		this.blockHeight = blockHeight;
 
 		this.lastUpdate = 0;
-		this.delay = 300;
+		this.delay = STARTING_DELAY;
 
 		this.createInvaders();
 	}
@@ -43,14 +44,13 @@ public class InvaderBlock {
 		}
 	}
 
-	public void reset(boolean createNewInvaders) {
-		if (createNewInvaders) {
-			this.createInvaders();
-		} else {
-			for (Invader[] i : this.block) {
-				for (Invader j : i) {
-					j.resurrect();
-				}
+	public void reset(boolean resetSpeed) {
+		if (resetSpeed) {
+			this.delay = STARTING_DELAY;
+		}
+		for (Invader[] i : this.block) {
+			for (Invader j : i) {
+				j.resurrect();
 			}
 		}
 	}
