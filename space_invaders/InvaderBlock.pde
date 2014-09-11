@@ -62,9 +62,20 @@ public class InvaderBlock {
 				this.flip();
 			}
 
+			boolean everyInvaderIsDead = true;
+
 			for (Invader[] i : this.block) {
 				for (Invader j : i) {
 					j.update();
+					everyInvaderIsDead = everyInvaderIsDead && !j.isAlive();
+				}
+			}
+
+			if (everyInvaderIsDead) {
+				for (Invader[] i : this.block) {
+					for (Invader j : i) {
+						j.resurrect();
+					}
 				}
 			}
 		}
