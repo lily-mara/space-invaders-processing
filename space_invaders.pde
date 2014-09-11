@@ -150,6 +150,7 @@ public class InvaderBlock {
 	private final int BORDER = 40;
 	private final int X_SPACING = 50;
 	private final int Y_SPACING = 60;
+	private final int STARTING_DELAY = 300;
 
 	private Invader[][] block;
 	private int blockWidth;
@@ -176,13 +177,28 @@ public class InvaderBlock {
 		this.blockHeight = blockHeight;
 
 		this.lastUpdate = 0;
-		this.delay = 300;
+		this.delay = STARTING_DELAY;
 
+		this.createInvaders();
+	}
+
+	private void createInvaders() {
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
 				int x = this.startX + j * X_SPACING;
 				int y = this.startY + i * Y_SPACING;
 				this.block[i][j] = new Invader(x, y);
+			}
+		}
+	}
+
+	public void reset(boolean resetSpeed) {
+		if (resetSpeed) {
+			this.delay = STARTING_DELAY;
+		}
+		for (Invader[] i : this.block) {
+			for (Invader j : i) {
+				j.resurrect();
 			}
 		}
 	}
@@ -210,10 +226,17 @@ public class InvaderBlock {
 				this.flip();
 			}
 
+			boolean everyInvaderIsDead = true;
+
 			for (Invader[] i : this.block) {
 				for (Invader j : i) {
 					j.update();
+					everyInvaderIsDead = everyInvaderIsDead && !j.isAlive();
 				}
+			}
+
+			if (everyInvaderIsDead) {
+				this.reset(false);
 			}
 		}
 	}
@@ -336,6 +359,8 @@ public class Invader {
 
 	private int posX;
 	private int posY;
+	private int originX;
+	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
 
@@ -347,6 +372,8 @@ public class Invader {
 	public Invader(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
+		this.originX = posX;
+		this.originY = posY;
 	}
 
 	/**
@@ -373,6 +400,11 @@ public class Invader {
 			rect(this.posX - 20, this.posY + 6, 4, 12);
 			rect(this.posX + 20, this.posY + 6, 4, 12);
 		}
+	}
+
+	private void reset() {
+		this.posX = this.originX;
+		this.posY = this.originY;
 	}
 
 	/**
@@ -406,6 +438,11 @@ public class Invader {
 
 	public boolean isAlive() {
 		return this.alive;
+	}
+
+	public void resurrect() {
+		this.reset();
+		this.alive = true;
 	}
 
 	public int getX() {
@@ -469,6 +506,10 @@ public class Player {
 		} else if (this.x > rightBarrier) {
 			this.render(rightBarrier, this.y);
 		}
+
+		for (int i = 0; i < this.lives; i++) {
+			this.render(50+i*70, height-40);
+		}
 	}
 
 	public void addInvaders(Invader[] invaders) {
@@ -505,6 +546,10 @@ public class Player {
 
 	public int getY() {
 		return this.y;
+	}
+
+	public void die() {
+		this.lives--;
 	}
 }
 public class Rectangle {
@@ -671,7 +716,6 @@ final int INVADER_BLOCK_START_Y = 100;
 InvaderBlock invaders;
 Player player;
 Roof[] roofs;
-boolean gameOver = false;
 
 PFont pixelFont;
 
@@ -695,7 +739,7 @@ void setup() {
 }
 
 void draw() {
-	if (!gameOver) {
+	if (player.getLives() > 0) {
 		background(0);
 		renderGUI();
 		invaders.render();
@@ -707,7 +751,8 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-		  gameOver = true;
+			player.die();
+			invaders.reset(true);
 		}
 	} else {
 		fill(#FF6600);
