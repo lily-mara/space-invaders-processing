@@ -92,7 +92,7 @@ public class Player {
 		return this.y;
 	}
 
-	public void kill() {
+	public void die() {
 		this.lives--;
 	}
 }

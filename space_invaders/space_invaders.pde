@@ -51,7 +51,8 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-			player.kill();
+			player.die();
+			invaders.reset(true);
 		}
 	} else {
 		fill(#FF6600);
