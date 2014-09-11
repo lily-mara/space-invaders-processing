@@ -50,6 +50,10 @@ public class Player {
 		} else if (this.x > rightBarrier) {
 			this.render(rightBarrier, this.y);
 		}
+
+		for (int i = 0; i < this.lives; i++) {
+			this.render(50+i*70, height-40);
+		}
 	}
 
 	public void addInvaders(Invader[] invaders) {
