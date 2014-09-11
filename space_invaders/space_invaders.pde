@@ -16,7 +16,6 @@ final int INVADER_BLOCK_START_Y = 100;
 InvaderBlock invaders;
 Player player;
 Roof[] roofs;
-boolean gameOver = false;
 
 PFont pixelFont;
 
@@ -40,7 +39,7 @@ void setup() {
 }
 
 void draw() {
-	if (!gameOver) {
+	if (player.getLives() > 0) {
 		background(0);
 		renderGUI();
 		invaders.render();
@@ -52,7 +51,7 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-			gameOver = true;
+			player.kill();
 		}
 	} else {
 		fill(#FF6600);
