@@ -62,6 +62,7 @@ public class Invader {
 	 */
 	public void kill() {
 		this.alive = false;
+		this.parent.invaderKilledHook();
 	}
 
 	/**
