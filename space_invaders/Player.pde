@@ -1,4 +1,5 @@
 public class Player {
+	public final int SPEED = 3;
 
 	private int x;
 	private int y;
@@ -51,8 +52,21 @@ public class Player {
 	public void update() {
 		this.child.update();
 
-		this.x = mouseX;
-		this.y = height - 100;
+		if (keyPressed) {
+			if (key == CODED) {
+				if (keyCode == LEFT) {
+					this.x -= SPEED;
+				}
+
+				if (keyCode == RIGHT) {
+					this.x += SPEED;
+				}
+			}
+
+			if (key == ' ') {
+				this.shoot();
+			}
+		}
 
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
