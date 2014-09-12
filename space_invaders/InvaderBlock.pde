@@ -184,9 +184,16 @@ public class InvaderBlock {
 	}
 
 	/**
+	   Run each time an invader in this InvaderBlock is killed
+	 */
+	public void invaderKilledHook() {
+		this.increaseSpeed();
+	}
+
+	/**
 	   Increase the speed at which this InvaderBlock moves
 	 */
-	public void increaseSpeed() {
+	private void increaseSpeed() {
 		this.delay -= 2;
 	}
 
