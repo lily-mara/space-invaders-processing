@@ -4,6 +4,8 @@ public class Invader {
 
 	private int posX;
 	private int posY;
+	private int originX;
+	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
 
@@ -15,6 +17,8 @@ public class Invader {
 	public Invader(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
+		this.originX = posX;
+		this.originY = posY;
 	}
 
 	/**
@@ -44,6 +48,14 @@ public class Invader {
 	}
 
 	/**
+	   Reset the position of this invader to its original position
+	 */
+	private void reset() {
+		this.posX = this.originX;
+		this.posY = this.originY;
+	}
+
+	/**
 	   sets the life status to false
 	 */
 	public void kill() {
@@ -68,18 +80,44 @@ public class Invader {
 		}
 	}
 
+	/**
+	   Increment the Y cordinate of this Invader by LEVEL
+	 */
 	public void downLevel() {
 		this.posY += LEVEL;
 	}
 
+	/**
+	   Return the alive status of this Invader
+
+	   @return alive status of this Invader
+	 */
 	public boolean isAlive() {
 		return this.alive;
 	}
 
+	/**
+	   Reset the position of this Invader and bring it back to life
+	 */
+	public void resurrect() {
+		this.reset();
+		this.alive = true;
+	}
+
+	/**
+	   Return the X cordinate of the center of this invader
+
+	   @return X cordinate of this invader
+	 */
 	public int getX() {
 		return this.posX;
 	}
 
+	/**
+	   Return the Y cordinate of the center of this invader
+
+	   @return Y cordinate of this invader
+	 */
 	public int getY() {
 		return this.posY;
 	}

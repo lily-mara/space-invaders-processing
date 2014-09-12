@@ -26,6 +26,10 @@ public class Bullet {
 		this.rectangles = new ArrayList<Rectangle>();
 	}
 
+	/**
+	   Update the position of this bullet, check collisions, and if
+	   the bullet goes out of bounds, kill it
+	 */
 	public void update() {
 		if (this.alive) {
 			this.y -= this.SPEED;
@@ -33,7 +37,7 @@ public class Bullet {
 			fill(255);
 			rect(this.x, this.y, 5, 20);
 		}
-		
+
 		if (this.y < -10) {
 			this.alive = false;
 		}

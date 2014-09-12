@@ -2,6 +2,7 @@ public class InvaderBlock {
 	private final int BORDER = 40;
 	private final int X_SPACING = 50;
 	private final int Y_SPACING = 60;
+	private final int STARTING_DELAY = 300;
 
 	private Invader[][] block;
 	private int blockWidth;
@@ -28,13 +29,41 @@ public class InvaderBlock {
 		this.blockHeight = blockHeight;
 
 		this.lastUpdate = 0;
-		this.delay = 300;
+		this.delay = STARTING_DELAY;
 
+		this.createInvaders();
+	}
+
+	/**
+	   Fill this InvaderBlock with Invaders based on the startX,
+	   startY, blockHeight, and blockWidth instance variables and the
+	   X_SPACING and Y_SPACING constants.
+	 */
+	private void createInvaders() {
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
 				int x = this.startX + j * X_SPACING;
 				int y = this.startY + i * Y_SPACING;
 				this.block[i][j] = new Invader(x, y);
+			}
+		}
+	}
+
+	/**
+	   Reset all of the Invaders in this InvaderBlock, if resetSpeed
+	   is true, then this will set the speed of Invaders to the
+	   default.
+
+	   @param resetSpeed true if the Invaders' speed should be reset,
+	   false otherwise
+	 */
+	public void reset(boolean resetSpeed) {
+		if (resetSpeed) {
+			this.delay = STARTING_DELAY;
+		}
+		for (Invader[] i : this.block) {
+			for (Invader j : i) {
+				j.resurrect();
 			}
 		}
 	}
@@ -62,10 +91,17 @@ public class InvaderBlock {
 				this.flip();
 			}
 
+			boolean everyInvaderIsDead = true;
+
 			for (Invader[] i : this.block) {
 				for (Invader j : i) {
 					j.update();
+					everyInvaderIsDead = everyInvaderIsDead && !j.isAlive();
 				}
+			}
+
+			if (everyInvaderIsDead) {
+				this.reset(false);
 			}
 		}
 	}

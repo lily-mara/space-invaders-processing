@@ -1,9 +1,12 @@
+/* @pjs font="Courier.vlw"; */
+
 /**
    @author Nate Mara
    @author Evan Baker
    @author Daltin Loomis
 
    @date 2013-10-12
+   @version 0.0.4 2014-09-11
 
    The game "Space Invaders" implemented in Processing.
 */
@@ -16,7 +19,6 @@ final int INVADER_BLOCK_START_Y = 100;
 InvaderBlock invaders;
 Player player;
 Roof[] roofs;
-boolean gameOver = false;
 
 PFont pixelFont;
 
@@ -40,7 +42,7 @@ void setup() {
 }
 
 void draw() {
-	if (!gameOver) {
+	if (player.getLives() > 0) {
 		background(0);
 		renderGUI();
 		invaders.render();
@@ -52,11 +54,18 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-		  gameOver = true;
+			player.kill();
+			invaders.reset(true);
 		}
 	} else {
 		fill(#FF6600);
-		text("GAME OVER", width/2, height/2);
+		background(0);
+		textAlign(CENTER);
+		textFont(pixelFont, 20);
+
+		text("GAME OVER", width/2, height/2 - 30);
+		text("SCORE:", width/2, height/2 + 20);
+		text(player.getScore(), width/2, height/2 + 50);
 	}
 }
 
