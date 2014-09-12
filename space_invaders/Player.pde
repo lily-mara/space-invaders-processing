@@ -71,13 +71,13 @@ public class Player {
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
 
-		if (this.x > leftBarrier && this.x < rightBarrier) {
-			this.render(this.x, this.y);
-		} else if (this.x < leftBarrier) {
-			this.render(leftBarrier, this.y);
+		if (this.x < leftBarrier) {
+			this.x = leftBarrier;
 		} else if (this.x > rightBarrier) {
-			this.render(rightBarrier, this.y);
+			this.x = rightBarrier;
 		}
+
+		this.render(this.x, this.y);
 
 		for (int i = 0; i < this.lives; i++) {
 			this.render(50+i*70, height-40);
