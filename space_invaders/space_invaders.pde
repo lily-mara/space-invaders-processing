@@ -51,7 +51,7 @@ void draw() {
 		}
 
 		if (invaders.belowHeight(500)) {
-			player.die();
+			player.kill();
 			invaders.reset(true);
 		}
 	} else {
