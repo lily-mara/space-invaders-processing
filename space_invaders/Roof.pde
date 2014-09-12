@@ -26,7 +26,7 @@ public class Roof {
 		rectMode(CORNERS);
 		int index = 0;
 
-		//First Row
+		// First Row
 		for(int i = 0; i < 10; i++) {
 			this.rectangles[index] = new Rectangle(
 				posX + (i * PIXEL_SIZE + (3 * PIXEL_SIZE)),
@@ -38,7 +38,7 @@ public class Roof {
 			index++;
 		}
 
-		//Second Row
+		// Second Row
 		for(int i = 0; i < 12; i++) {
 			this.rectangles[index] = new Rectangle(
 				posX + (i * PIXEL_SIZE + (2 * PIXEL_SIZE)),
@@ -50,7 +50,7 @@ public class Roof {
 			index++;
 		}
 
-		//Third Row
+		// Third Row
 		for(int i = 0; i < 14; i++) {
 			this.rectangles[index] = new Rectangle(
 				posX + (i * PIXEL_SIZE + PIXEL_SIZE),
@@ -62,7 +62,7 @@ public class Roof {
 			index++;
 		}
 
-		// big ol middle chunk
+		// Middle
 		for(int i = 0; i < 6; i++) {
 			for(int k = 0; k < 16; k++){
 				this.rectangles[index] = new Rectangle(
@@ -76,8 +76,8 @@ public class Roof {
 			}
 		}
 
-		//Bottom Bitch part that's stuuuuupid
-		//Left bottom bitch
+		// Bottom part
+		// --Left bottom
 		for(int i = 0; i < 6; i++) {
 			this.rectangles[index] = new Rectangle(
 				posX + (i * PIXEL_SIZE),
@@ -119,7 +119,7 @@ public class Roof {
 			index++;
 		}
 
-		//Right bottom bitch
+		// --Right bottom
 		for(int i = 0; i < 6; i++) {
 			this.rectangles[index] = new Rectangle(
 				posX + (i * PIXEL_SIZE + (10 * PIXEL_SIZE)),
