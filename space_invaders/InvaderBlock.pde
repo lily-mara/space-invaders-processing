@@ -221,7 +221,7 @@ public class InvaderBlock {
 	 */
 	private void flip() {
 		if (this.delay > 0) {
-			this.delay -= 20;
+			this.delay -= 5;
 		}
 
 		for (Invader[] i : this.block) {
