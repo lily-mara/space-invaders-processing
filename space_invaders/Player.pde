@@ -1,4 +1,5 @@
 public class Player {
+	public final int SPEED = 3;
 
 	private int x;
 	private int y;
@@ -10,8 +11,8 @@ public class Player {
 	   Construct a new Player object
 	 */
 	public Player() {
-		this.x = x;
-		this.y = y;
+		this.x = width / 2;
+		this.y = height - 100;
 		this.score = 0;
 		this.lives = 5;
 		this.child = new Bullet(this);
@@ -51,19 +52,32 @@ public class Player {
 	public void update() {
 		this.child.update();
 
-		this.x = mouseX;
-		this.y = height - 100;
+		if (keyPressed) {
+			if (key == CODED) {
+				if (keyCode == LEFT) {
+					this.x -= SPEED;
+				}
+
+				if (keyCode == RIGHT) {
+					this.x += SPEED;
+				}
+			}
+
+			if (key == ' ') {
+				this.shoot();
+			}
+		}
 
 		int leftBarrier = 30;
 		int rightBarrier = width - 30;
 
-		if (this.x > leftBarrier && this.x < rightBarrier) {
-			this.render(this.x, this.y);
-		} else if (this.x < leftBarrier) {
-			this.render(leftBarrier, this.y);
+		if (this.x < leftBarrier) {
+			this.x = leftBarrier;
 		} else if (this.x > rightBarrier) {
-			this.render(rightBarrier, this.y);
+			this.x = rightBarrier;
 		}
+
+		this.render(this.x, this.y);
 
 		for (int i = 0; i < this.lives; i++) {
 			this.render(50+i*70, height-40);
