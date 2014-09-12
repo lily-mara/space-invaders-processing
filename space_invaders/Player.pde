@@ -10,8 +10,8 @@ public class Player {
 	   Construct a new Player object
 	 */
 	public Player() {
-		this.x = x;
-		this.y = y;
+		this.x = width / 2;
+		this.y = height - 100;
 		this.score = 0;
 		this.lives = 5;
 		this.child = new Bullet(this);
