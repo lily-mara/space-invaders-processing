@@ -6,6 +6,7 @@
    @author Daltin Loomis
 
    @date 2013-10-12
+   @version 0.0.4 2014-09-11
 
    The game "Space Invaders" implemented in Processing.
 */
