@@ -22,7 +22,7 @@ public class Roof {
 	/**
 	   Construct all of the rectangles to draw this Roof
 	 */
-	public void setRectangles() {
+	private void setRectangles() {
 		rectMode(CORNERS);
 		int index = 0;
 
