@@ -47,6 +47,9 @@ public class Invader {
 		}
 	}
 
+	/**
+	   Reset the position of this invader to its original position
+	 */
 	private void reset() {
 		this.posX = this.originX;
 		this.posY = this.originY;
