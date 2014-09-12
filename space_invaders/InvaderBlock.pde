@@ -44,7 +44,7 @@ public class InvaderBlock {
 			for (int j = 0; j < blockWidth; j++) {
 				int x = this.startX + j * X_SPACING;
 				int y = this.startY + i * Y_SPACING;
-				this.block[i][j] = new Invader(x, y);
+				this.block[i][j] = new Invader(x, y, this);
 			}
 		}
 	}
@@ -138,7 +138,7 @@ public class InvaderBlock {
 				}
 			}
 		}
-		return new Invader(0, 0);
+		return new Invader(0, 0, this);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class InvaderBlock {
 				}
 			}
 		}
-		return new Invader(0, 0);
+		return new Invader(0, 0, this);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class InvaderBlock {
 				}
 			}
 		}
-		return new Invader(0, 0);
+		return new Invader(0, 0, this);
 	}
 
 	/**
