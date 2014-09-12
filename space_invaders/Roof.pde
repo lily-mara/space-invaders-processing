@@ -6,6 +6,12 @@ public class Roof {
 	private int posY;
 	private Rectangle[] rectangles;
 
+	/**
+	   Construct a Roof object with the given X and Y cordinates.
+
+	   @param x the X cordinate of the upper-left corner of this Roof.
+	   @param y the Y cordinate of the upper-left corner of this Roof.
+	 */
 	public Roof(int x, int y) {
 		this.posX = x;
 		this.posY = y;
@@ -13,6 +19,9 @@ public class Roof {
 		this.setRectangles();
 	}
 
+	/**
+	   Construct all of the rectangles to draw this Roof
+	 */
 	public void setRectangles() {
 		rectMode(CORNERS);
 		int index = 0;
