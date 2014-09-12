@@ -1,3 +1,5 @@
+/* @pjs font="Courier.vlw"; */
+
 /**
    @author Nate Mara
    @author Evan Baker
@@ -56,7 +58,13 @@ void draw() {
 		}
 	} else {
 		fill(#FF6600);
-		text("GAME OVER", width/2, height/2);
+		background(0);
+		textAlign(CENTER);
+		textFont(pixelFont, 20);
+
+		text("GAME OVER", width/2, height/2 - 30);
+		text("SCORE:", width/2, height/2 + 20);
+		text(player.getScore(), width/2, height/2 + 50);
 	}
 }
 
