@@ -37,7 +37,7 @@ public class Bullet {
 			fill(255);
 			rect(this.x, this.y, 5, 20);
 		}
-		
+
 		if (this.y < -10) {
 			this.alive = false;
 		}
