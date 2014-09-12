@@ -184,6 +184,13 @@ public class InvaderBlock {
 	}
 
 	/**
+	   Increase the speed at which this InvaderBlock moves
+	 */
+	public void increaseSpeed() {
+		this.delay -= 2;
+	}
+
+	/**
 	   Returns the lowest Invader in this block that is alive (no
 	   assumptions should be made about the height of the Invader)
 
