@@ -90,20 +90,38 @@ public class Roof {
 		}
 	}
 
+	/**
+	   Draw this roof
+	 */
 	public void render() {
 		for(int i = 0; i < NUM_PIXELS; i++){
 			this.rectangles[i].render();
 		}
 	}
 
+	/**
+	   Return the X cordinate of the upper-left corner of this Roof
+
+	   @return x cordinate of this Roof
+	 */
 	public int getX() {
 		return this.posX;
 	}
 
+	/**
+	   Return the Y cordinate of the upper-left corner of this Roof
+
+	   @return y cordinate of this Roof
+	 */
 	public int getY() {
 		return this.posY;
 	}
 
+	/**
+	   Return the array that contains all of the Rectangles making up this Roof
+
+	   @return all Rectangles in this Roof
+	 */
 	public Rectangle[] getRectangles() {
 		return this.rectangles;
 	}
