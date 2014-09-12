@@ -34,6 +34,11 @@ public class InvaderBlock {
 		this.createInvaders();
 	}
 
+	/**
+	   Fill this InvaderBlock with Invaders based on the startX,
+	   startY, blockHeight, and blockWidth instance variables and the
+	   X_SPACING and Y_SPACING constants.
+	 */
 	private void createInvaders() {
 		for (int i = 0; i < blockHeight; i++) {
 			for (int j = 0; j < blockWidth; j++) {
@@ -44,6 +49,14 @@ public class InvaderBlock {
 		}
 	}
 
+	/**
+	   Reset all of the Invaders in this InvaderBlock, if resetSpeed
+	   is true, then this will set the speed of Invaders to the
+	   default.
+
+	   @param resetSpeed true if the Invaders' speed should be reset,
+	   false otherwise
+	 */
 	public void reset(boolean resetSpeed) {
 		if (resetSpeed) {
 			this.delay = STARTING_DELAY;
