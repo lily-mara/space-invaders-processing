@@ -8,17 +8,19 @@ public class Invader {
 	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
+	private InvaderBlock parent;
 
 	/**
 	   A single "space invader" object
 	   @param posX the the left bound of this invader
 	   @param posY the right bound of this invader
 	 */
-	public Invader(int posX, int posY) {
+	public Invader(int posX, int posY, InvaderBlock parent) {
 		this.posX = posX;
 		this.posY = posY;
 		this.originX = posX;
 		this.originY = posY;
+		this.parent = parent;
 	}
 
 	/**
