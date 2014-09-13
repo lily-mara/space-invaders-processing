@@ -5,16 +5,16 @@ public class InvaderBullet {
 	public final double ODDS = 0.05;
 
 	private Invader parent;
-	private int posX;
-	private int posY;
+	private int x;
+	private int y;
 	private boolean alive;
 	private ArrayList<Player> players;
 	private ArrayList<Rectangle> rectangles;
 
 	public InvaderBullet(Invader parent) {
 		this.parent = parent;
-		this.posX = parent.getX();
-		this.posY = parent.getY();
+		this.x = parent.getX();
+		this.y = parent.getY();
 
 		this.alive = false;
 		this.players = new ArrayList<Player>();
@@ -38,11 +38,9 @@ public class InvaderBullet {
 	}
 
 	private void spawn() {
-		if (!this.alive) {
-			this.x = this.parent.getX();
-			this.y = this.parent.getY();
-			this.alive = true;
-		}
+		this.x = this.parent.getX();
+		this.y = this.parent.getY();
+		this.alive = true;
 	}
 
 	public void addRectangle(Rectangle toAdd) {
@@ -56,12 +54,9 @@ public class InvaderBullet {
 	public void checkCollide() {
 		for (int i = 0; i < this.players.size(); i++) {
 			Player current = this.players.get(i);
-			if (current.isAlive()) {
-				if (this.collidesWithPlayer(current)) {
-					current.kill();
-					this.alive = false;
-					this.parent.addToScore(50);
-				}
+			if (this.collidesWithPlayer(current)) {
+				current.kill();
+				this.alive = false;
 			}
 		}
 
