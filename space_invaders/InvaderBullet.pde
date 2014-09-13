@@ -88,7 +88,7 @@ public class InvaderBullet {
 
 		boolean inLeft = this.x >= (check.getX() - 26 - tolerance);
 		boolean inRight = this.x <= (check.getX() + 26 + tolerance);
-		boolean inTop = this.y >= check.getY();
+		boolean inTop = this.y >= (check.getY() - tolerance);
 		boolean inBottom = this.y <= (check.getY() + 16 + tolerance);
 
 		return inLeft && inRight && inTop && inBottom;
