@@ -23,6 +23,16 @@ public class Invader {
 		this.bullet = new InvaderBullet(this);
 	}
 
+	public addRectangles(Rectangle[] rectangles) {
+		for (Rectangle r : rectangles) {
+			this.bullet.addRectangle(r);
+		}
+	}
+
+	public addPlayer(Player p) {
+		this.bullet.addPlayer(p);
+	}
+
 	/**
 	   Draw this space invader
 	 */
