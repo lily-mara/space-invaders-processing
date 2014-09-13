@@ -28,6 +28,8 @@ public class Invader {
 	 */
 	public void render() {
 		if (this.alive) {
+			this.bullet.update();
+
 			rect(this.posX, this.posY + 5, 28, 8);
 			rect(this.posX, this.posY, 12, 16);
 			rect(this.posX - 12, this.posY + 10, 4, 4);
