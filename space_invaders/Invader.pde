@@ -8,6 +8,7 @@ public class Invader {
 	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
+	private InvaderBullet bullet;
 
 	/**
 	   A single "space invader" object
@@ -19,6 +20,7 @@ public class Invader {
 		this.posY = posY;
 		this.originX = posX;
 		this.originY = posY;
+		this.bullet = new InvaderBullet(this);
 	}
 
 	/**
