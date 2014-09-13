@@ -49,7 +49,7 @@ public class InvaderBlock {
 		}
 	}
 
-	public addRectangles(Rectangle[] rectangles) {
+	public void addRectangles(Rectangle[] rectangles) {
 		for (Invader[] j : this.block) {
 			for (Invader i : j) {
 				i.addRectangles(rectangles);
@@ -57,7 +57,7 @@ public class InvaderBlock {
 		}
 	}
 
-	public addPlayer(Player p) {
+	public void addPlayer(Player p) {
 		for (Invader[] j : this.block) {
 			for (Invader i : j) {
 				i.addPlayer(p);
