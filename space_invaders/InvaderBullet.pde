@@ -86,10 +86,10 @@ public class InvaderBullet {
 	private boolean collidesWithPlayer(Player check) {
 		int tolerance = 3;
 
-		boolean inLeft = this.x >= (check.getX() - 16 - tolerance);
-		boolean inRight = this.x <= (check.getX() + 16 + tolerance);
-		boolean inTop = this.y >= (check.getY() - 23 + tolerance);
-		boolean inBottom = this.y <= (check.getY() + 23 + tolerance);
+		boolean inLeft = this.x >= (check.getX() - 26 - tolerance);
+		boolean inRight = this.x <= (check.getX() + 26 + tolerance);
+		boolean inTop = this.y >= check.getY();
+		boolean inBottom = this.y <= (check.getY() + 16 + tolerance);
 
 		return inLeft && inRight && inTop && inBottom;
 	}
