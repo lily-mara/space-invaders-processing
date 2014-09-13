@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class InvaderBullet {
 	public final int SPEED = 10;
-	public final double ODDS = 0.05;
+	public final double ODDS = 0.0005;
 
 	private Invader parent;
 	private int x;
