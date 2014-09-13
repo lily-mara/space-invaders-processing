@@ -8,6 +8,7 @@ public class Invader {
 	private int originY;
 	private boolean alive = true;
 	private boolean moveRight = true;
+	private InvaderBullet bullet;
 
 	/**
 	   A single "space invader" object
@@ -19,6 +20,17 @@ public class Invader {
 		this.posY = posY;
 		this.originX = posX;
 		this.originY = posY;
+		this.bullet = new InvaderBullet(this);
+	}
+
+	public void addRectangles(Rectangle[] rectangles) {
+		for (Rectangle r : rectangles) {
+			this.bullet.addRectangle(r);
+		}
+	}
+
+	public void addPlayer(Player p) {
+		this.bullet.addPlayer(p);
 	}
 
 	/**
@@ -26,6 +38,8 @@ public class Invader {
 	 */
 	public void render() {
 		if (this.alive) {
+			this.bullet.update();
+
 			rect(this.posX, this.posY + 5, 28, 8);
 			rect(this.posX, this.posY, 12, 16);
 			rect(this.posX - 12, this.posY + 10, 4, 4);

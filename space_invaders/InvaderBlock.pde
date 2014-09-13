@@ -49,6 +49,22 @@ public class InvaderBlock {
 		}
 	}
 
+	public void addRectangles(Rectangle[] rectangles) {
+		for (Invader[] j : this.block) {
+			for (Invader i : j) {
+				i.addRectangles(rectangles);
+			}
+		}
+	}
+
+	public void addPlayer(Player p) {
+		for (Invader[] j : this.block) {
+			for (Invader i : j) {
+				i.addPlayer(p);
+			}
+		}
+	}
+
 	/**
 	   Reset all of the Invaders in this InvaderBlock, if resetSpeed
 	   is true, then this will set the speed of Invaders to the
