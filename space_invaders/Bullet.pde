@@ -38,6 +38,14 @@ public class Bullet implements Collidable {
 	}
 
 	/**
+	   Stops rendering this Bullet, & this Bullet will no longer
+	   collide with objects until it is spawn()-ed again
+	 */
+	public void kill() {
+		this.alive = false;
+	}
+
+	/**
 	   returns the x-cordinate of the upper-left corner of this Bullet
 
 	   @return x-cordinate of the upper-left corner of this Bullet
