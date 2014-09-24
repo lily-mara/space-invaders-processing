@@ -1,8 +1,8 @@
 public class Invader implements Collidable {
 	private final int MOVE_FACTOR = 3;
 	private final int LEVEL = 10;
-	public final int INVADER_WIDTH = 46;
-	public final int INVADER_HEIGHT = 32;
+	public final int WIDTH = 46;
+	public final int HEIGHT = 32;
 
 	private int posX;
 	private int posY;
@@ -144,7 +144,7 @@ public class Invader implements Collidable {
 	   @return width of this Invader
 	 */
 	public int getWidth(){
-		return INVADER_WIDTH;
+		return WIDTH;
 	}
 
 	/**
@@ -153,6 +153,6 @@ public class Invader implements Collidable {
 	   @return height of this Invader
 	 */
 	public int getHeight() {
-		return INVADER_HEIGHT;
+		return HEIGHT;
 	}
 }
