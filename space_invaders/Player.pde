@@ -176,4 +176,13 @@ public class Player implements Collidable {
 	public void addToScore(int score) {
 		this.score += score;
 	}
+
+	/**
+	   returns the alive status of this Player
+
+	   @return wether or not this Player is alive
+	 */
+	public boolean isAlive() {
+		return this.lives > 0;
+	}
 }
