@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Bullet implements Collidable {
 	public final int SPEED = 15;
-	public final int BULLET_WIDTH = 5;
-	public final int BULLET_HEIGHT = 20;
+	public final int WIDTH = 5;
+	public final int HEIGHT = 20;
 
 	private boolean alive;
 	private Player parent;
@@ -52,7 +52,7 @@ public class Bullet implements Collidable {
 	   @return width of this Bullet
 	 */
 	public int getWidth(){
-		return BULLET_WIDTH;
+		return WIDTH;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Bullet implements Collidable {
 	   @return height of this Bullet
 	 */
 	public int getHeight() {
-		return BULLET_HEIGHT;
+		return HEIGHT;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Bullet implements Collidable {
 			this.y -= this.SPEED;
 			this.checkCollide();
 			fill(255);
-			rect(this.x, this.y, BULLET_WIDTH, BULLET_HEIGHT);
+			rect(this.x, this.y, WIDTH, HEIGHT);
 		}
 
 		if (this.y < -10) {
