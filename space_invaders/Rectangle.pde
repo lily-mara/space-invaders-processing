@@ -1,4 +1,4 @@
-public class Rectangle {
+public class Rectangle implements Collidable {
 	private int posX;
 	private int posY;
 	private int width;
