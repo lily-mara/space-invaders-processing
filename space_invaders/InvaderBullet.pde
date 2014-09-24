@@ -133,6 +133,14 @@ public class InvaderBullet implements Collidable {
 		return inLeft && inRight && inTop && inBottom;
 	}
 
+	/**
+	   Stops rendering this InvaderBullet, & this InvaderBullet will
+	   no longer collide with objects until it is spawn()-ed again
+	 */
+	public void kill() {
+		this.alive = false;
+	}
+
 	public boolean isAlive() {
 		return this.alive;
 	}
