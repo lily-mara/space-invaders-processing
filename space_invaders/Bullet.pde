@@ -29,36 +29,36 @@ public class Bullet implements Collidable {
 	}
 
 	/**
-	   returns the x-cordinate of the upper-left corner of this Rectangle
+	   returns the x-cordinate of the upper-left corner of this Bullet
 
-	   @return x-cordinate of the upper-left corner of this Rectangle
+	   @return x-cordinate of the upper-left corner of this Bullet
 	 */
 	public int getX() {
 		return this.x;
 	}
 
 	/**
-	   returns the y-cordinate of the upper-left corner of this Rectangle
+	   returns the y-cordinate of the upper-left corner of this Bullet
 
-	   @return y-cordinate of the upper-left corner of this Rectangle
+	   @return y-cordinate of the upper-left corner of this Bullet
 	 */
 	public int getY() {
 		return this.y;
 	}
 
 	/**
-	   returns the width of this object
+	   returns the width of this Bullet
 
-	   @return width of this object
+	   @return width of this Bullet
 	 */
 	public int getWidth(){
 		return BULLET_WIDTH;
 	}
 
 	/**
-	   returns the height of this object
+	   returns the height of this Bullet
 
-	   @return height of this object
+	   @return height of this Bullet
 	 */
 	public int getHeight() {
 		return BULLET_HEIGHT;
