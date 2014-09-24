@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
-public class Bullet {
+public class Bullet implements Collidable {
 	public final int SPEED = 15;
+	public final int BULLET_WIDTH = 5;
+	public final int BULLET_HEIGHT = 20;
 
 	private boolean alive;
 	private Player parent;
@@ -27,6 +29,42 @@ public class Bullet {
 	}
 
 	/**
+	   returns the x-cordinate of the upper-left corner of this Rectangle
+
+	   @return x-cordinate of the upper-left corner of this Rectangle
+	 */
+	public int getX() {
+		return this.x;
+	}
+
+	/**
+	   returns the y-cordinate of the upper-left corner of this Rectangle
+
+	   @return y-cordinate of the upper-left corner of this Rectangle
+	 */
+	public int getY() {
+		return this.y;
+	}
+
+	/**
+	   returns the width of this object
+
+	   @return width of this object
+	 */
+	public int getWidth(){
+		return BULLET_WIDTH;
+	}
+
+	/**
+	   returns the height of this object
+
+	   @return height of this object
+	 */
+	public int getHeight() {
+		return BULLET_HEIGHT;
+	}
+
+	/**
 	   Update the position of this bullet, check collisions, and if
 	   the bullet goes out of bounds, kill it
 	 */
@@ -35,7 +73,7 @@ public class Bullet {
 			this.y -= this.SPEED;
 			this.checkCollide();
 			fill(255);
-			rect(this.x, this.y, 5, 20);
+			rect(this.x, this.y, BULLET_WIDTH, BULLET_HEIGHT);
 		}
 
 		if (this.y < -10) {
