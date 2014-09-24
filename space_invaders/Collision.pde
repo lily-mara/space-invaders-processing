@@ -8,10 +8,16 @@ public class Collision {
 	}
 
 	public void update() {
-
+		if (this.collide()) {
+			this.collidable1.kill();
+			this.collidable2.kill();
+		}
 	}
 
-	public boolean collide() {
+	private boolean collide() {
+		if (!(this.collidable1.isAlive() && this.collidable2.isAlive())) {
+			return false;
+		}
 		return false;
 	}
 }
