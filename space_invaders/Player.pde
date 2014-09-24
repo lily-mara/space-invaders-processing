@@ -1,5 +1,8 @@
-public class Player {
+public class Player implements Collidable {
 	public final int SPEED = 3;
+
+	public final int WIDTH = 52;
+	public final int HEIGHT = 32;
 
 	private int x;
 	private int y;
@@ -33,6 +36,42 @@ public class Player {
 		rect(posX, posY + 10, 44, 04);
 		rect(posX, posY + 06, 12, 8);
 		rect(posX, posY + 00, 4, 4);
+	}
+
+	/**
+	   Return the X cordinate of the center of this Player
+
+	   @return X cordinate of this Player
+	 */
+	public int getX() {
+		return this.x;
+	}
+
+	/**
+	   Return the Y cordinate of the center of this Player
+
+	   @return Y cordinate of this Player
+	 */
+	public int getY() {
+		return this.y;
+	}
+
+	/**
+	   returns the width of this Player
+
+	   @return width of this Player
+	 */
+	public int getWidth(){
+		return WIDTH;
+	}
+
+	/**
+	   returns the height of this Player
+
+	   @return height of this Player
+	 */
+	public int getHeight() {
+		return HEIGHT;
 	}
 
 	/**
@@ -136,23 +175,5 @@ public class Player {
 	 */
 	public void addToScore(int score) {
 		this.score += score;
-	}
-
-	/**
-	   Returns the X cordinate of the center of this Player
-
-	   @return X cordinate of this Player
-	 */
-	public int getX() {
-		return this.x;
-	}
-
-	/**
-	   Returns the Y cordinate of the center of this Player
-
-	   @return Y cordinate of this Player
-	 */
-	public int getY() {
-		return this.y;
 	}
 }
