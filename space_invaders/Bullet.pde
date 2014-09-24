@@ -29,6 +29,15 @@ public class Bullet implements Collidable {
 	}
 
 	/**
+	   returns the alive status of this Bullet
+
+	   @return wether or not this Bullet is alive
+	 */
+	public boolean isAlive() {
+		return this.alive;
+	}
+
+	/**
 	   returns the x-cordinate of the upper-left corner of this Bullet
 
 	   @return x-cordinate of the upper-left corner of this Bullet
@@ -178,13 +187,5 @@ public class Bullet implements Collidable {
 		boolean inBottom = this.y <= (check.getY() + 23 + tolerance);
 
 		return inLeft && inRight && inTop && inBottom;
-	}
-
-	/**
-	   Returns the instance variable `alive`
-	   @return the instance variable `alive`
-	 */
-	public boolean isAlive() {
-		return this.alive;
 	}
 }
