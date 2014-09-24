@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
-public class InvaderBullet {
+public class InvaderBullet implements Collidable {
+	public final int WIDTH = 2;
+	public final int HEIGHT = 20;
+
 	public final int SPEED = 10;
 	public final double ODDS = 0.0005;
 
@@ -26,7 +29,7 @@ public class InvaderBullet {
 			this.y += this.SPEED;
 			this.checkCollide();
 			fill(255);
-			rect(this.x, this.y, 2, 20);
+			rect(this.x, this.y, WIDTH, HEIGHT);
 		} else {
 			if (Math.random() < this.ODDS) {
 				this.spawn();
@@ -49,6 +52,42 @@ public class InvaderBullet {
 
 	public void addPlayer(Player toAdd) {
 		this.players.add(toAdd);
+	}
+
+	/**
+	   Return the X cordinate of the center of this invaderBullet
+
+	   @return X cordinate of this invaderBullet
+	 */
+	public int getX() {
+		return this.x;
+	}
+
+	/**
+	   Return the Y cordinate of the center of this invaderBullet
+
+	   @return Y cordinate of this invaderBullet
+	 */
+	public int getY() {
+		return this.y;
+	}
+
+	/**
+	   returns the width of this InvaderBullet
+
+	   @return width of this InvaderBullet
+	 */
+	public int getWidth(){
+		return WIDTH;
+	}
+
+	/**
+	   returns the height of this InvaderBullet
+
+	   @return height of this InvaderBullet
+	 */
+	public int getHeight() {
+		return HEIGHT;
 	}
 
 	public void checkCollide() {
