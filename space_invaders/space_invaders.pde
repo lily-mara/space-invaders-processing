@@ -19,6 +19,7 @@ final int INVADER_BLOCK_START_Y = 100;
 InvaderBlock invaders;
 Player player;
 Roof[] roofs;
+Collisions collisions;
 
 PFont pixelFont;
 
@@ -31,15 +32,26 @@ void setup() {
 	noStroke();
 	invaders = new InvaderBlock(11, 5, INVADER_BLOCK_START_X, INVADER_BLOCK_START_Y);
 	player = new Player();
-
-	player.addInvaders(invaders.getInvaders());
-	invaders.addPlayer(player);
+	collisions = new Collisions();
 
 	roofs = new Roof[4];
 	for (int i = 0; i < roofs.length; i++) {
 		roofs[i] = new Roof(50 + i*150, 525);
-		player.addRectangles(roofs[i].getRectangles());
-		invaders.addRectangles(roofs[i].getRectangles());
+	}
+
+	for (Roof r : roofs) {
+		for (Rectangle rect : r.getRectangles()) {
+			collisions.addCollision(rect, player);
+		}
+	}
+
+	for (Invader i : invaders.getInvaders()) {
+		collisions.addCollision(player, i);
+		for (Roof r : roofs) {
+			for (Rectangle rect : r.getRectangles()) {
+				collisions.addCollision(rect, i);
+			}
+		}
 	}
 }
 
@@ -50,6 +62,7 @@ void draw() {
 		invaders.render();
 		invaders.update();
 		player.update();
+		collisions.update();
 
 		for (Roof r : roofs) {
 			r.render();
