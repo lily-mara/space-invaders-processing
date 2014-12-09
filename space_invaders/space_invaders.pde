@@ -47,6 +47,7 @@ void setup() {
 
 	for (Invader i : invaders.getInvaders()) {
 		collisions.addCollision(player, i);
+		collisions.addCollision(player.getBulletCollidable(), i);
 		for (Roof r : roofs) {
 			for (Rectangle rect : r.getRectangles()) {
 				collisions.addCollision(rect, i);

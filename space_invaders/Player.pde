@@ -185,4 +185,8 @@ public class Player implements Collidable {
 	public boolean isAlive() {
 		return this.lives > 0;
 	}
+
+	public Collidable getBulletCollidable() {
+		return this.child;
+	}
 }
