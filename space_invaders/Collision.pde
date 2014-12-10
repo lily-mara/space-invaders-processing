@@ -22,16 +22,16 @@ public class Collision {
 			boolean xCollision = false;
 			boolean yCollision = false;
 
-			// if xDistance > 0 then collidable1 is to the left of collidable2
-			if (xDistance > 0) {
-				xCollision = xDistance <= this.collidable1.getWidth();
+			// if xDistance < 0 then collidable1 is to the left of collidable2
+			if (xDistance < 0) {
+				xCollision = -xDistance <= this.collidable1.getWidth();
 			} else {
 				xCollision = xDistance <= this.collidable2.getWidth();
 			}
 
-			// if yDistance > 0 then collidable1 is below collidable2
-			if (yDistance > 0) {
-				yCollision = yDistance <= this.collidable2.getHeight();
+			// if yDistance < 0 then collidable1 is below collidable2
+			if (yDistance < 0) {
+				yCollision = -yDistance <= this.collidable2.getHeight();
 			} else {
 				yCollision = yDistance <= this.collidable1.getHeight();
 			}
