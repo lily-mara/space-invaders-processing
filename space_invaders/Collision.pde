@@ -1,11 +1,19 @@
 public class Collision {
 	private Collidable collidable1;
 	private Collidable collidable2;
+	private double tolerance;
 
-	public Collision(Collidable collidable1, Collidable collidable2) {
+	public Collision(Collidable collidable1, Collidable collidable2, double tolerance) {
+		assert tolerance > 0 && tolerance <= 1;
 		this.collidable1 = collidable1;
 		this.collidable2 = collidable2;
+		this.tolerance = tolerance;
 	}
+
+	public Collision(Collidable collidable1, Collidable collidable2) {
+		this(collidable1, collidable2, 1);
+	}
+
 
 	public void update() {
 		if (this.collide()) {
@@ -18,6 +26,9 @@ public class Collision {
 		if ((this.collidable1.isAlive() && this.collidable2.isAlive())) {
 			int xDistance = this.collidable1.getX() - this.collidable2.getX();
 			int yDistance = this.collidable1.getY() - this.collidable2.getY();
+
+			xDistance *= this.tolerance;
+			yDistance *= this.tolerance;
 
 			boolean xCollision = false;
 			boolean yCollision = false;

@@ -41,7 +41,7 @@ void setup() {
 
 	for (Roof r : roofs) {
 		for (Rectangle rect : r.getRectangles()) {
-			collisions.addCollision(rect, player.getBulletCollidable());
+			collisions.addCollision(rect, player.getBulletCollidable(), 0.75);
 		}
 	}
 

@@ -7,6 +7,10 @@ public class Collisions {
 		this.collisions = new ArrayList<Collision>();
 	}
 
+	public void addCollision(Collidable c1, Collidable c2, double tolerance) {
+		this.addCollision(new Collision(c1, c2, tolerance));
+	}
+
 	public void addCollision(Collidable c1, Collidable c2) {
 		this.addCollision(new Collision(c1, c2));
 	}
